@@ -1,0 +1,46 @@
+.modalContainer {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(250, 235, 215, 0.184);
+    backdrop-filter: blur(20px);
+    z-index: 10;
+    transition: all .3s ease;
+    animation: appear .3s ease;
+}
+
+@keyframes appear {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.modalClosed.modalContainer {
+    transform: scale(0.9);
+    opacity: 0;
+}
+
+.modalOpen.modalContainer {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.modalContent {
+    min-width: 600px;
+    padding: 2rem;
+    border-radius: 1rem;
+    background-color: #ffffff;
+    box-shadow: 0 0 3px #00000020;
+}
+
