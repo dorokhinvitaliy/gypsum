@@ -12,7 +12,7 @@
 
   color-scheme: light dark;
   color: rgba(0, 0, 0, 0.87);
-  background-color: #eaeaea;
+  background-color: #f0f0f0;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -47,6 +47,17 @@ h1 {
   font-weight: inherit;
   font-size: inherit;
   border: none;
+}
+
+button {
+  all: unset; /* сбрасываем ВСЁ: фон, бордеры, паддинги, шрифты и т.п. */
+  display: inline-flex; /* удобнее для иконок и текста */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  /* для доступности */
+  -webkit-tap-highlight-color: transparent; 
 }
 
 button:focus,

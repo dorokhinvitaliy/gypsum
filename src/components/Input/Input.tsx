@@ -10,12 +10,14 @@ export default function Input({
   onChange,
   placeholder = 'Поле ввода',
   helperText,
+  width = 'auto',
 }: {
   type: string;
   value: string;
   onChange: (arg0: string) => void;
   placeholder: string;
   helperText?: string;
+  width?: 'max' | 'auto';
 }) {
   const [focused, updateFocused] = useState(false);
   const [empty, updateEmpty] = useState(value == '');
@@ -35,6 +37,7 @@ export default function Input({
     <div
       className={classNames(styles.inputBox_container, {
         [styles.tipActive]: helperText && focused,
+        [styles.maxContainer]: width === 'max',
       })}
     >
       <div

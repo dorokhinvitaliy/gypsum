@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import classNames from 'classnames';
 import styles from './Tooltip.module.css';
 
@@ -6,10 +7,17 @@ type TooltipProps = {
   content: React.ReactNode;
   position?: 'top' | 'bottom' | 'left' | 'right';
   children: React.ReactNode;
+  delay?: number;
 };
 
-export default function Tooltip({ children, content, position = 'top' }: TooltipProps) {
+export default function Tooltip({
+  children,
+  content,
+  position = 'top',
+  delay = 100,
+}: TooltipProps) {
   const [visible, setVisible] = useState(false);
+  const [showing, setShowing] = useState(false);
   const [coords, setCoords] = useState({ top: 0, left: 0 });
   const [placement, setPlacement] = useState(position);
 
@@ -21,7 +29,6 @@ export default function Tooltip({ children, content, position = 'top' }: Tooltip
 
     const wrapperRect = wrapperRef.current.getBoundingClientRect();
     const tooltipRect = tooltipRef.current.getBoundingClientRect();
-
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
 
@@ -36,7 +43,7 @@ export default function Tooltip({ children, content, position = 'top' }: Tooltip
       right: viewportWidth - wrapperRect.right,
     };
 
-    // Автоматический выбор позиции, если места недостаточно
+    // Автоподбор позиции, если выбранная не помещается
     if (
       position === 'top' &&
       space.top < tooltipRect.height &&
@@ -63,7 +70,7 @@ export default function Tooltip({ children, content, position = 'top' }: Tooltip
       newPlacement = 'left';
     }
 
-    // Вычисляем координаты по новой позиции
+    // Вычисляем координаты
     switch (newPlacement) {
       case 'top':
         top = wrapperRect.top - tooltipRect.height - 8;
@@ -87,30 +94,42 @@ export default function Tooltip({ children, content, position = 'top' }: Tooltip
     setCoords({ top, left });
   };
 
+  const handleShow = () => {
+    setVisible(true);
+    setTimeout(() => setShowing(true), 10);
+  };
+
+  const handleHide = () => {
+    setShowing(false);
+    setTimeout(() => setVisible(false), 200);
+  };
+
   useEffect(() => {
     if (visible) calculatePosition();
     window.addEventListener('resize', calculatePosition);
     return () => window.removeEventListener('resize', calculatePosition);
-  }, [visible]);
+  }, [visible, content]);
 
   return (
     <div
       ref={wrapperRef}
       className={styles.tooltipWrapper}
-      onMouseEnter={() => setVisible(true)}
-      onMouseLeave={() => setVisible(false)}
+      onMouseEnter={() => setTimeout(handleShow, delay)}
+      onMouseLeave={handleHide}
     >
       {children}
 
-      {visible && (
-        <div
-          ref={tooltipRef}
-          className={classNames(styles.tooltip, styles[placement])}
-          style={{ top: coords.top, left: coords.left }}
-        >
-          {content}
-        </div>
-      )}
+      {visible &&
+        createPortal(
+          <div
+            ref={tooltipRef}
+            className={classNames(styles.tooltip, styles[placement], { [styles.showing]: showing })}
+            style={{ top: coords.top, left: coords.left }}
+          >
+            {content}
+          </div>,
+          document.body,
+        )}
     </div>
   );
 }

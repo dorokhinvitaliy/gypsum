@@ -1,0 +1,55 @@
+.checkbox-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+
+  .checkbox {
+    width: 20px;
+    height: 20px;
+    box-shadow: inset 0 0 0 2px #2558cf8b;
+    border-radius: 0.4rem;
+    color: #fff;
+    transition: all 0.3s ease;
+  }
+
+  .checkbox-icon {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.4rem;
+    transform: scale(0.2);
+    background-color: #2558cf;
+    color: #fff;
+    transition: all 0.3s ease;
+  }
+
+  .checkbox.checked {
+    .checkbox-icon {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .checkbox-label {
+    position: relative;
+  }
+}
+
+.checkbox-container:active {
+  transform: scale(0.95);
+}

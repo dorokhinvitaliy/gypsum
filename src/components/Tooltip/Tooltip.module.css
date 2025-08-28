@@ -4,24 +4,27 @@
 }
 
 .tooltip {
-  position: fixed; /* fixed чтобы учитывать скролл страницы */
-  background: rgba(0,0,0,0.8);
-  color: white;
-  padding: 6px 10px;
-  border-radius: 4px;
+  position: absolute;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(2px);
+  color: rgb(0, 0, 0);
+  padding: 1rem;
+  border-radius: 1rem;
   font-size: 14px;
-  z-index: 1000;
-  white-space: nowrap;
-  pointer-events: none;
+  z-index: 10;
+  white-space: pre-wrap; /* поддержка многострочного текста */
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transform: translateY(5px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: all;
 }
 
-.tooltipWrapper:hover .tooltip {
+.tooltip.showing {
   opacity: 1;
+  transform: translateY(0);
 }
 
-.tooltip.top::after,
+/* .tooltip.top::after,
 .tooltip.bottom::after,
 .tooltip.left::after,
 .tooltip.right::after {
@@ -35,7 +38,7 @@
   left: 50%;
   transform: translateX(-50%);
   border-width: 5px 5px 0 5px;
-  border-color: rgba(0,0,0,0.8) transparent transparent transparent;
+  border-color: rgba(255, 255, 255, 0.85) transparent transparent transparent;
 }
 
 .tooltip.bottom::after {
@@ -43,7 +46,7 @@
   left: 50%;
   transform: translateX(-50%);
   border-width: 0 5px 5px 5px;
-  border-color: transparent transparent rgba(0,0,0,0.8) transparent;
+  border-color: transparent transparent rgba(255, 255, 255, 0.85) transparent;
 }
 
 .tooltip.left::after {
@@ -51,7 +54,7 @@
   right: -5px;
   transform: translateY(-50%);
   border-width: 5px 0 5px 5px;
-  border-color: transparent transparent transparent rgba(0,0,0,0.8);
+  border-color: transparent transparent transparent rgba(255, 255, 255, 0.85);
 }
 
 .tooltip.right::after {
@@ -59,5 +62,75 @@
   left: -5px;
   transform: translateY(-50%);
   border-width: 5px 5px 5px 0;
-  border-color: transparent rgba(0,0,0,0.8) transparent transparent;
+  border-color: transparent rgba(255, 255, 255, 0.85) transparent transparent;
 }
+ */
+
+ .tooltip::before,
+    .tooltip::after {
+      content: "";
+      position: absolute;
+      top: 100%; /* под тултипом */
+      width: 1em;
+      height: 1em;
+      background: transparent;
+    }
+
+    .tooltip::before {
+      left: calc(50% - 1em);
+      background-image: radial-gradient(circle at 0% 100%, transparent 1em, #ffffff calc(1em + 1px));
+    }
+
+    .tooltip::after {
+      left: 50%;
+      background-image: radial-gradient(circle at 100% 100%, transparent 1em, #ffffff calc(1em + 1px));
+    }
+
+    /* === другие варианты === */
+    /* стрелка сверху */
+    .tooltip.top::before,
+    .tooltip.top::after {
+      top: auto;
+      bottom: 100%;
+    }
+    .tooltip.top::before {
+      left: calc(50% - 1em);
+      background-image: radial-gradient(circle at 0% 0%, transparent 1em, #ffffff calc(1em + 1px));
+    }
+    .tooltip.top::after {
+      left: 50%;
+      background-image: radial-gradient(circle at 100% 0%, transparent 1em, #ffffff calc(1em + 1px));
+    }
+
+    /* стрелка слева */
+    .tooltip.right::before,
+    .tooltip.right::after {
+      top: 50%;
+      left: auto;
+      right: 100%;
+      transform: translateY(-50%);
+    }
+    .tooltip.right::before {
+      top: calc(50% - 1em);
+      background-image: radial-gradient(circle at 0% 0%, transparent 1em, #ffffff calc(1em + 1px));
+    }
+    .tooltip.right::after {
+      top: 50%;
+      background-image: radial-gradient(circle at 0% 100%, transparent 1em, #ffffff calc(1em + 1px));
+    }
+
+    /* стрелка справа */
+    .tooltip.left::before,
+    .tooltip.left::after {
+      top: 50%;
+      left: 100%;
+      transform: translateY(-50%);
+    }
+    .tooltip.left::before {
+      top: calc(50% - 1em);
+      background-image: radial-gradient(circle at 100% 0%, transparent 1em, #ffffff calc(1em + 1px));
+    }
+    .tooltip.left::after {
+      top: 50%;
+      background-image: radial-gradient(circle at 100% 100%, transparent 1em, #ffffff calc(1em + 1px));
+    }
