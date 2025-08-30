@@ -194,7 +194,7 @@
     transform: rotate(180deg) translateY(50%);
 }
 
-.selectBox.empty .inputBoxField {
+.selectBox.empty:not(.active) .inputBoxField {
     height: 0;
 }
 

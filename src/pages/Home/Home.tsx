@@ -10,12 +10,13 @@ import Tooltip from '../../components/Tooltip/Tooltip';
 import Checkbox, { CheckboxGroup } from '../../components/Checkbox/Checkbox';
 import Loader from '../../components/Loader/Loader';
 import Textarea from '../../components/Input/Textarea';
+import Disclosure from '../../components/Disclosure/Disclosure';
 
 export default function Home() {
   const [value, setValue] = useState('');
   const [longValue, setLongValue] = useState('');
-  const [selected, setSelected] = useState<Option>();
-  const [selectedM, setSelectedM] = useState<Option[]>();
+  const [selected, setSelected] = useState<Option | null>(null);
+  const [selectedM, setSelectedM] = useState<Option[]>([]);
   const [checked, setChecked] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,8 +30,11 @@ export default function Home() {
       direction="column"
       alignItems="center"
       gap="1rem"
-      style={{ padding: '1rem', margin: '0 auto', maxWidth: '400px', position: 'relative' }}
+      style={{ padding: '1rem', margin: '0 auto', maxWidth: '600px', position: 'relative' }}
     >
+      <Disclosure style={{ width: '100%' }} summary="Нажми, чтобы развернуть содержимое">
+        <CheckboxGroup options={options} selected={selectedM} onChange={val => setSelectedM(val)} />
+      </Disclosure>
       <Input
         type={'text'}
         value={value}
@@ -55,23 +59,23 @@ export default function Home() {
         options={options}
         placeholder="Выбери меня!"
         selected={selected}
-        onChange={option => setSelected(option)}
+        onChange={(option: Option) => setSelected(option)}
         closeAfterSelect={true}
         floatingOptions={checked}
         width="max"
       ></Select>
-      {isLoading && <Loader withOverlay />}
       <Select
         options={options}
         placeholder="Выбери меня!"
         selected={selectedM}
-        onChange={options => setSelectedM(options)}
+        onChange={(options: Option[]) => setSelectedM(options)}
         floatingOptions={checked}
         closeAfterSelect={false}
         multiple
         width="max"
       ></Select>
-      <CheckboxGroup options={options} selected={selectedM} onChange={val => setSelectedM(val)} />
+      {isLoading && <Loader withOverlay />}
+
       {/* <Select placeholder="role">
         <Select.Option>Привет!</Select.Option>
       </Select> */}

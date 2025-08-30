@@ -1,0 +1,38 @@
+.disclosure {
+  gap: 0;
+  transition: all 0.3s ease;
+  &.opened {
+    gap: 0.5rem;
+  }
+  .contentWrapper {
+    overflow: hidden;
+    transition: height 0.3s ease;
+  }
+
+  .summary {
+    cursor: pointer;
+    padding: 1rem;
+    color: #6c6c6c;
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+    &:active {
+      transform: scale(0.95);
+    }
+    &:hover {
+      background-color: #6c6c6c1b;
+    }
+    &.opened {
+      color: #000;
+    }
+  }
+
+  .summaryArrow {
+    width: 20px;
+    height: 20px;
+    color: #6c6c6c;
+    transition: transform 0.3s ease;
+    &.opened {
+      transform: rotate(180deg);
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import type { HTMLAttributes, ReactNode, CSSProperties } from 'react';
 import styles from './Flex.module.css';
+import classNames from 'classnames';
 
 type FlexProps = {
   direction?: CSSProperties['flexDirection'];
@@ -7,6 +8,7 @@ type FlexProps = {
   alignItems?: CSSProperties['alignItems'];
   gap?: string | number;
   children: ReactNode;
+  className?: string;
 } & HTMLAttributes<HTMLDivElement>;
 
 export default function Flex({
@@ -16,19 +18,20 @@ export default function Flex({
   gap,
   children,
   style,
+  className,
   ...rest
 }: FlexProps) {
   return (
     <div
-      className={styles.flex}
+      className={classNames(styles.flex, className)}
       style={{
         flexDirection: direction,
         justifyContent,
         alignItems,
         gap,
-        ...style, // объединяем с внешним style
+        ...style,
       }}
-      {...rest} // сюда попадают className, id, onClick и другие стандартные пропсы div
+      {...rest}
     >
       {children}
     </div>

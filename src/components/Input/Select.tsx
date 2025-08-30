@@ -10,14 +10,18 @@ import { CheckIcon, ChevronDownIcon } from '@heroicons/react/24/solid';
 import { useClickOutside } from './useClickOutside.ts';
 
 const SelectContext = createContext<{
-  selected: Option | Option[] | null | undefined;
-  closeAfterSelect?: boolean;
+  selected: Option | Option[] | null;
+  closeAfterSelect: boolean;
   multiple?: boolean;
   selectLimit?: number;
   onChange: (option: Option | Option[]) => void;
-  updateEmpty: (arg0: boolean) => void;
   updateFocused: (arg0: boolean) => void;
-} | null>(null);
+}>({
+  selected: null,
+  closeAfterSelect: false,
+  onChange: () => {},
+  updateFocused: () => {},
+});
 
 const Select = ({
   options,
@@ -32,7 +36,7 @@ const Select = ({
   selectLimit,
 }: {
   options: Option[];
-  selected?: Option | Option[] | null;
+  selected: Option | Option[] | null;
   placeholder: string;
   floatingOptions?: boolean;
   onChange: (arg0: Option | Option[]) => void;
@@ -48,7 +52,7 @@ const Select = ({
   const optionsRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState('0px');
 
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   useClickOutside(ref, () => updateFocused(false));
 
   const renderSelected = (selected: Option | Option[] | null | undefined) => {
@@ -69,6 +73,14 @@ const Select = ({
       setHeight('0px');
     }
   }, [focused, options]);
+
+  useEffect(() => {
+    if (multiple) {
+      updateEmpty(!(selected && Array.isArray(selected) && selected?.length));
+    } else {
+      updateEmpty(!selected);
+    }
+  }, [selected, multiple]);
 
   return (
     <div
@@ -104,7 +116,6 @@ const Select = ({
               multiple,
               selectLimit,
               onChange,
-              updateEmpty,
               updateFocused,
             }}
           >
@@ -118,35 +129,32 @@ const Select = ({
 };
 
 const Option = ({ id, text }: Option) => {
-  const ctx = useContext(SelectContext);
-  const {
-    selected,
-    closeAfterSelect,
-    multiple,
-    selectLimit,
-    onChange,
-    updateEmpty,
-    updateFocused,
-  } = ctx;
+  const { selected, closeAfterSelect, multiple, selectLimit, onChange, updateFocused } =
+    useContext(SelectContext);
 
   const renderChange = ({ id, text }: Option) => {
     if (multiple) {
-      const filtered = selected?.filter((s: Option) => s.id != id) || [];
+      if (!Array.isArray(selected)) return false;
+      const filtered = selected.filter((s: Option) => s.id != id) || [];
       if (!selected?.some((s: Option) => s.id === id))
         if (filtered.length < (selectLimit || Infinity)) filtered.push({ id, text });
       onChange(filtered);
-      updateEmpty(filtered.length === 0);
     } else {
       onChange({ id, text });
-      updateEmpty(false);
     }
+  };
+
+  const isSelected = () => {
+    return multiple
+      ? Array.isArray(selected) && selected.some(s => id === s.id)
+      : selected && 'id' in selected && id == selected.id;
   };
 
   return (
     <div
       tabIndex={0}
       className={classNames(styles.selectBox_option, {
-        [styles.selected]: multiple ? selected?.some(s => id === s.id) : id == selected?.id,
+        [styles.selected]: isSelected(),
       })}
       onClick={() => {
         renderChange({ id, text });
