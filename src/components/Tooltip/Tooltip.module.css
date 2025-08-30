@@ -9,7 +9,7 @@
   backdrop-filter: blur(2px);
   color: rgb(0, 0, 0);
   padding: 1rem;
-  border-radius: 1rem;
+  border-radius: .5rem;
   font-size: 14px;
   z-index: 10;
   white-space: pre-wrap; /* поддержка многострочного текста */
@@ -66,71 +66,71 @@
 }
  */
 
- .tooltip::before,
-    .tooltip::after {
-      content: "";
-      position: absolute;
-      top: 100%; /* под тултипом */
-      width: 1em;
-      height: 1em;
-      background: transparent;
-    }
 
-    .tooltip::before {
-      left: calc(50% - 1em);
-      background-image: radial-gradient(circle at 0% 100%, transparent 1em, #ffffff calc(1em + 1px));
-    }
+ .withArrow.tooltip::before, .withArrow.tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%; /* под тултипом */
+    width: 1em;
+    height: 1em;
+    background: transparent;
+  }
 
-    .tooltip::after {
-      left: 50%;
-      background-image: radial-gradient(circle at 100% 100%, transparent 1em, #ffffff calc(1em + 1px));
-    }
+  .tooltip::before {
+    left: calc(50% - 1em);
+    background-image: radial-gradient(circle at 0% 100%, transparent 1em, #ffffff calc(1em + 1px));
+  }
 
-    /* === другие варианты === */
-    /* стрелка сверху */
-    .tooltip.top::before,
-    .tooltip.top::after {
-      top: auto;
-      bottom: 100%;
-    }
-    .tooltip.top::before {
-      left: calc(50% - 1em);
-      background-image: radial-gradient(circle at 0% 0%, transparent 1em, #ffffff calc(1em + 1px));
-    }
-    .tooltip.top::after {
-      left: 50%;
-      background-image: radial-gradient(circle at 100% 0%, transparent 1em, #ffffff calc(1em + 1px));
-    }
+  .tooltip::after {
+    left: 50%;
+    background-image: radial-gradient(circle at 100% 100%, transparent 1em, #ffffff calc(1em + 1px));
+  }
 
-    /* стрелка слева */
-    .tooltip.right::before,
-    .tooltip.right::after {
-      top: 50%;
-      left: auto;
-      right: 100%;
-      transform: translateY(-50%);
-    }
-    .tooltip.right::before {
-      top: calc(50% - 1em);
-      background-image: radial-gradient(circle at 0% 0%, transparent 1em, #ffffff calc(1em + 1px));
-    }
-    .tooltip.right::after {
-      top: 50%;
-      background-image: radial-gradient(circle at 0% 100%, transparent 1em, #ffffff calc(1em + 1px));
-    }
+  /* === другие варианты === */
+  /* стрелка сверху */
+  .tooltip.bottom::before,
+  .tooltip.bottom::after {
+    top: auto;
+    bottom: 100%;
+  }
+  .tooltip.bottom::before {
+    left: calc(50% - 1em);
+    background-image: radial-gradient(circle at 0% 0%, transparent 1em, #ffffff calc(1em + 1px));
+  }
+  .tooltip.bottom::after {
+    left: 50%;
+    background-image: radial-gradient(circle at 100% 0%, transparent 1em, #ffffff calc(1em + 1px));
+  }
 
-    /* стрелка справа */
-    .tooltip.left::before,
-    .tooltip.left::after {
-      top: 50%;
-      left: 100%;
-      transform: translateY(-50%);
-    }
-    .tooltip.left::before {
-      top: calc(50% - 1em);
-      background-image: radial-gradient(circle at 100% 0%, transparent 1em, #ffffff calc(1em + 1px));
-    }
-    .tooltip.left::after {
-      top: 50%;
-      background-image: radial-gradient(circle at 100% 100%, transparent 1em, #ffffff calc(1em + 1px));
-    }
+  /* стрелка слева */
+  .tooltip.right::before,
+  .tooltip.right::after {
+    top: 50%;
+    left: auto;
+    right: 100%;
+    transform: translateY(-50%);
+  }
+  .tooltip.right::before {
+    top: calc(50% - 1em);
+    background-image: radial-gradient(circle at 0% 0%, transparent 1em, #ffffff calc(1em + 1px));
+  }
+  .tooltip.right::after {
+    top: 50%;
+    background-image: radial-gradient(circle at 0% 100%, transparent 1em, #ffffff calc(1em + 1px));
+  }
+
+  /* стрелка справа */
+  .tooltip.left::before,
+  .tooltip.left::after {
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+  }
+  .tooltip.left::before {
+    top: calc(50% - 1em);
+    background-image: radial-gradient(circle at 100% 0%, transparent 1em, #ffffff calc(1em + 1px));
+  }
+  .tooltip.left::after {
+    top: 50%;
+    background-image: radial-gradient(circle at 100% 100%, transparent 1em, #ffffff calc(1em + 1px));
+  }

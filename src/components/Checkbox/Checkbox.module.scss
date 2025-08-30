@@ -5,8 +5,34 @@
   cursor: pointer;
   position: relative;
   user-select: none;
-  gap: 0.5rem;
+  gap: 0.7rem;
   transition: all 0.3s ease;
+
+  &:active {
+    &:not(.filled) {
+      .checkbox {
+        transform: scale(0.8);
+      }
+    }
+  }
+
+  &:hover {
+    .checkbox {
+      box-shadow: inset 0 0 0 2px #2558cfce;
+    }
+  }
+
+  &.filled {
+    background: #2658cf1f;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    &:active {
+      transform: scale(0.95);
+    }
+    &:hover {
+      background: #2659cf2b;
+    }
+  }
 
   .checkbox {
     width: 20px;
@@ -15,6 +41,12 @@
     border-radius: 0.4rem;
     color: #fff;
     transition: all 0.3s ease;
+    &.checked {
+      .checkbox-icon {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
   }
 
   .checkbox-icon {
@@ -31,13 +63,6 @@
     transition: all 0.3s ease;
   }
 
-  .checkbox.checked {
-    .checkbox-icon {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
   input {
     position: absolute;
     opacity: 0;
@@ -48,8 +73,4 @@
   .checkbox-label {
     position: relative;
   }
-}
-
-.checkbox-container:active {
-  transform: scale(0.95);
 }

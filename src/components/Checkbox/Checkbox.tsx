@@ -1,10 +1,13 @@
 import styles from './Checkbox.module.scss';
 import classNames from 'classnames';
 import type { SVGProps } from 'react';
+import Flex from '../Flex/Flex';
+import type { Option } from '../Input/Select.type';
 
 type CheckboxProps = {
   label?: string;
   checked?: boolean;
+  filled?: boolean;
   onChange?: (checked: boolean) => void;
 };
 
@@ -23,13 +26,18 @@ export function CheckIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-export default function Checkbox({ label, checked = false, onChange }: CheckboxProps) {
+export default function Checkbox({
+  label,
+  checked = false,
+  filled = false,
+  onChange,
+}: CheckboxProps) {
   const toggle = () => {
     onChange?.(!checked);
   };
 
   return (
-    <label className={styles['checkbox-container']}>
+    <label className={classNames(styles['checkbox-container'], { [styles.filled]: filled })}>
       <div className={classNames(styles.checkbox, { [styles.checked]: checked })}>
         <div className={styles['checkbox-icon']}>
           <CheckIcon />
@@ -38,5 +46,35 @@ export default function Checkbox({ label, checked = false, onChange }: CheckboxP
       <input type="checkbox" checked={checked} onChange={toggle} />
       {label && <span className={styles['checkbox-label']}>{label}</span>}
     </label>
+  );
+}
+
+export function CheckboxGroup({
+  options,
+  selected = [],
+  onChange,
+  style,
+}: {
+  options: Option[];
+  selected: Option[] | null | undefined;
+  style?: React.CSSProperties;
+  onChange: (arg0: Option[]) => void;
+}) {
+  return (
+    <Flex direction="column" gap={5} style={{ width: '100%', ...style }}>
+      {options.map(option => (
+        <Checkbox
+          key={option.id}
+          label={option.text}
+          checked={selected?.some(o => o.id === option.id)}
+          filled
+          onChange={v =>
+            v
+              ? onChange([...selected, option])
+              : onChange(selected?.filter(s => s.id !== option.id))
+          }
+        />
+      ))}
+    </Flex>
   );
 }

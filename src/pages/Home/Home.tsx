@@ -7,14 +7,18 @@ import type { Option } from '../../components/Input/Select.type';
 import Modal from '../../components/Modal/Modal';
 import Text from '../../components/Text/Text';
 import Tooltip from '../../components/Tooltip/Tooltip';
-import Checkbox from '../../components/Checkbox/Checkbox';
+import Checkbox, { CheckboxGroup } from '../../components/Checkbox/Checkbox';
+import Loader from '../../components/Loader/Loader';
+import Textarea from '../../components/Input/Textarea';
 
 export default function Home() {
   const [value, setValue] = useState('');
+  const [longValue, setLongValue] = useState('');
   const [selected, setSelected] = useState<Option>();
   const [selectedM, setSelectedM] = useState<Option[]>();
   const [checked, setChecked] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
   const options: Option[] = [
     { id: 1, text: 'value' },
     { id: 2, text: 'Второй элемент списка' },
@@ -25,7 +29,7 @@ export default function Home() {
       direction="column"
       alignItems="center"
       gap="1rem"
-      style={{ padding: '1rem', margin: '0 auto', maxWidth: '400px' }}
+      style={{ padding: '1rem', margin: '0 auto', maxWidth: '400px', position: 'relative' }}
     >
       <Input
         type={'text'}
@@ -36,6 +40,12 @@ export default function Home() {
         placeholder={'house'}
         width="max"
       />
+      <Textarea
+        width="max"
+        value={longValue}
+        onChange={val => setLongValue(val)}
+        placeholder="Здесь будет много текста"
+      ></Textarea>
       <Checkbox
         label="Включить плавающее меню"
         checked={checked}
@@ -50,6 +60,7 @@ export default function Home() {
         floatingOptions={checked}
         width="max"
       ></Select>
+      {isLoading && <Loader withOverlay />}
       <Select
         options={options}
         placeholder="Выбери меня!"
@@ -60,12 +71,34 @@ export default function Home() {
         multiple
         width="max"
       ></Select>
+      <CheckboxGroup options={options} selected={selectedM} onChange={val => setSelectedM(val)} />
       {/* <Select placeholder="role">
         <Select.Option>Привет!</Select.Option>
       </Select> */}
       <Flex gap={10}>
-        <Button onClick={() => setOpen(true)}>Открой модальное окно</Button>
-        <Button secondary>Text</Button>
+        <Button onClick={() => setOpen(true)}>Открой окно</Button>
+        <Tooltip
+          position="bottom"
+          content={
+            <Flex direction="column">
+              <Text variant="heading">Важное сообщение!</Text>
+              <Text variant="body">Уже всё...</Text>
+              <Button flat>Ознакомлен</Button>
+            </Flex>
+          }
+        >
+          <Button
+            secondary
+            onClick={() => {
+              setIsLoading(true);
+              setTimeout(() => {
+                setIsLoading(false);
+              }, 3000);
+            }}
+          >
+            Text
+          </Button>
+        </Tooltip>
       </Flex>
       <Modal open={open} onClose={() => setOpen(false)}>
         <Flex gap={10} direction="column">
@@ -81,19 +114,9 @@ export default function Home() {
           </Flex>
         </Flex>
       </Modal>
-      {/* <Tooltip
-        content={
-          <div>
-            <strong>Важная подсказка</strong>
-            <p>
-              Многострочный текст с <span>разметкой</span> и иконками
-            </p>
-          </div>
-        }
-        position="right"
-      >
+      <Tooltip hasArrow content={<>Треш</>} position="right">
         <button>Наведи на меня</button>
-      </Tooltip> */}
+      </Tooltip>
     </Flex>
   );
 }

@@ -8,6 +8,7 @@ export type ButtonProps = {
   flat?: boolean;
   long?: boolean;
   disabled?: boolean;
+  loading?: boolean;
   className?: string;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
@@ -18,6 +19,7 @@ export default function Button({
   long = false,
   disabled = false,
   className = '',
+  loading = false,
   ...props
 }: ButtonProps) {
   return (
@@ -25,6 +27,7 @@ export default function Button({
       className={classNames(
         styles.button,
         { [styles.disabled]: disabled },
+        { [styles.loading]: loading },
         { [styles.secondary]: secondary },
         { [styles.flat]: flat },
         { [styles.long]: long },

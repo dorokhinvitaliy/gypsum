@@ -13,6 +13,7 @@ const SelectContext = createContext<{
   selected: Option | Option[] | null | undefined;
   closeAfterSelect?: boolean;
   multiple?: boolean;
+  selectLimit?: number;
   onChange: (option: Option | Option[]) => void;
   updateEmpty: (arg0: boolean) => void;
   updateFocused: (arg0: boolean) => void;
@@ -28,6 +29,7 @@ const Select = ({
   multiple = false,
   children,
   width = 'auto',
+  selectLimit,
 }: {
   options: Option[];
   selected?: Option | Option[] | null;
@@ -38,6 +40,7 @@ const Select = ({
   multiple?: boolean;
   children?: React.ReactNode;
   width?: 'auto' | 'max';
+  selectLimit?: number;
 }) => {
   const [focused, updateFocused] = useState(false);
   const [empty, updateEmpty] = useState(selected == null);
@@ -95,7 +98,15 @@ const Select = ({
       <div className={styles.selectBox_options} style={{ height: height }} ref={optionsRef}>
         <div className={styles.optionsGroup}>
           <SelectContext.Provider
-            value={{ selected, closeAfterSelect, multiple, onChange, updateEmpty, updateFocused }}
+            value={{
+              selected,
+              closeAfterSelect,
+              multiple,
+              selectLimit,
+              onChange,
+              updateEmpty,
+              updateFocused,
+            }}
           >
             {options && options?.map(option => <Option key={'option_' + option.id} {...option} />)}
             {children}
@@ -108,12 +119,21 @@ const Select = ({
 
 const Option = ({ id, text }: Option) => {
   const ctx = useContext(SelectContext);
-  const { selected, closeAfterSelect, multiple, onChange, updateEmpty, updateFocused } = ctx;
+  const {
+    selected,
+    closeAfterSelect,
+    multiple,
+    selectLimit,
+    onChange,
+    updateEmpty,
+    updateFocused,
+  } = ctx;
 
   const renderChange = ({ id, text }: Option) => {
     if (multiple) {
       const filtered = selected?.filter((s: Option) => s.id != id) || [];
-      if (!selected?.some((s: Option) => s.id === id)) filtered.push({ id, text });
+      if (!selected?.some((s: Option) => s.id === id))
+        if (filtered.length < (selectLimit || Infinity)) filtered.push({ id, text });
       onChange(filtered);
       updateEmpty(filtered.length === 0);
     } else {

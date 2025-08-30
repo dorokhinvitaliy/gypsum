@@ -7,10 +7,14 @@
     background-color: #d9d9d966;
     border-radius: 1rem;
     transition: all .3s ease;
-    height: calc(60px - 2rem)!IMPORTANT;
+    height: 62px!IMPORTANT;
     
     justify-content: center;
     z-index: 1;
+}
+
+.autoHeight {
+    height: auto!important;
 }
 
 .inputBox_container, .selectBox_container {
@@ -48,8 +52,16 @@
     outline: none!important;
     color: #000;
     border: none;
+    padding: 0;
     background: none;
     transition: height .3s ease;
+}
+
+.textareaField {
+    min-height: 24px;
+    resize: none;
+    overflow: hidden;
+    transition: none;
 }
 
 .selectBox .inputBoxField {

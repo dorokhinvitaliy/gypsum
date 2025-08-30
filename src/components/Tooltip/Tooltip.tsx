@@ -8,6 +8,7 @@ type TooltipProps = {
   position?: 'top' | 'bottom' | 'left' | 'right';
   children: React.ReactNode;
   delay?: number;
+  hasArrow?: boolean;
 };
 
 export default function Tooltip({
@@ -15,6 +16,7 @@ export default function Tooltip({
   content,
   position = 'top',
   delay = 100,
+  hasArrow = true,
 }: TooltipProps) {
   const [visible, setVisible] = useState(false);
   const [showing, setShowing] = useState(false);
@@ -113,7 +115,7 @@ export default function Tooltip({
   return (
     <div
       ref={wrapperRef}
-      className={styles.tooltipWrapper}
+      className={classNames(styles.tooltipWrapper)}
       onMouseEnter={() => setTimeout(handleShow, delay)}
       onMouseLeave={handleHide}
     >
@@ -123,7 +125,10 @@ export default function Tooltip({
         createPortal(
           <div
             ref={tooltipRef}
-            className={classNames(styles.tooltip, styles[placement], { [styles.showing]: showing })}
+            className={classNames(styles.tooltip, styles[placement], {
+              [styles.showing]: showing,
+              [styles.withArrow]: hasArrow,
+            })}
             style={{ top: coords.top, left: coords.left }}
           >
             {content}
