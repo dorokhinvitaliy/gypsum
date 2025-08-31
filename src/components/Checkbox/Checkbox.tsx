@@ -66,12 +66,12 @@ export function CheckboxGroup({
         <Checkbox
           key={option.id}
           label={option.text}
-          checked={selected?.some(o => o.id === option.id)}
+          checked={Array.isArray(selected) && selected.some(o => o.id === option.id)}
           filled
           onChange={v =>
             v
-              ? onChange([...selected, option])
-              : onChange(selected?.filter(s => s.id !== option.id))
+              ? Array.isArray(selected) && onChange([...selected, option])
+              : Array.isArray(selected) && onChange(selected.filter(s => s.id !== option.id))
           }
         />
       ))}

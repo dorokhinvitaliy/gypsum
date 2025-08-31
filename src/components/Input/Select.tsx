@@ -49,7 +49,7 @@ const Select = ({
   const [focused, updateFocused] = useState(false);
   const [empty, updateEmpty] = useState(selected == null);
 
-  const optionsRef = useRef<HTMLDivElement>(null);
+  const optionsRef = useRef<HTMLElement>(null);
   const [height, setHeight] = useState('0px');
 
   const ref = useRef<HTMLDivElement | null>(null);

@@ -51,9 +51,9 @@ const Summary = ({ children }: { children: React.ReactNode }) => {
 const Content = ({ children }: { children: React.ReactNode }) => {
   const { opened } = useContext(DisclosureContext);
   const [contentHeight, setContentHeight] = useState(0);
-  const contentRef = useRef(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
-    if (opened) {
+    if (opened && contentRef.current) {
       const realHeight = contentRef?.current?.scrollHeight;
       setContentHeight(realHeight);
     } else {

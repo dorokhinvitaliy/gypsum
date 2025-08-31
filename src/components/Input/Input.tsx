@@ -21,7 +21,7 @@ export default function Input({
 }) {
   const [focused, updateFocused] = useState(false);
   const [empty, updateEmpty] = useState(value == '');
-  const tipRef = useRef(null);
+  const tipRef = useRef<HTMLDivElement>(null);
   const [tipHeight, setTipHeight] = useState('0px');
 
   useEffect(() => {
@@ -52,8 +52,8 @@ export default function Input({
               onChange(e.target.value);
               updateEmpty(e.target.value == '');
             }}
-            onFocus={e => updateFocused(true)}
-            onBlur={e => updateFocused(false)}
+            onFocus={() => updateFocused(true)}
+            onBlur={() => updateFocused(false)}
             className={styles.inputBoxField}
           />
         </label>

@@ -7,37 +7,39 @@
 }
 
 .loading-bar {
-  width: 10px;
+  width: 20px;
   height: 100px;
-  margin: 0 5px;
+  margin: 0 7px;
   background-color: #747bff;
   border-radius: 5px;
-  animation: loading-wave-animation 1s ease-in-out infinite;
+  animation: loading-wave-animation 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
 }
 
 .loading-bar:nth-child(1) {
-  animation-delay: 0.2s;
-  height: 30px;
+  animation-delay: 0s;
+  height: 40px;
+  display: none;
 }
 
 .loading-bar:nth-child(2) {
-  animation-delay: 0.1s;
-  height: 70px;
+  animation-delay: 0s;
+  height: 50px;
 }
 
 .loading-bar:nth-child(3) {
-  height: 120px;
-  animation-delay: 0s;
+  height: 100px;
+  animation-delay: 0.1s;
 }
 
 .loading-bar:nth-child(4) {
-  animation-delay: 0.1s;
-  height: 70px;
+  animation-delay: 0.2s;
+  height: 50px;
 }
 
 .loading-bar:nth-child(5) {
-  animation-delay: 0.2s;
-  height: 30px;
+  animation-delay: 0.4s;
+  height: 40px;
+  display: none;
 }
 
 @keyframes loading-wave-animation {

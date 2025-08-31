@@ -19,14 +19,16 @@ export default function Textarea({
 }) {
   const [focused, updateFocused] = useState(false);
   const [empty, updateEmpty] = useState(value == '');
-  const tipRef = useRef(null);
-  const textareaRef = useRef(null);
+  const tipRef = useRef<HTMLDivElement | null>(null);
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [tipHeight, setTipHeight] = useState('0px');
   const [textareaHeight, setTextareaHeight] = useState('0px');
 
   const onResize = () => {
-    const scrollHeight = textareaRef?.current?.scrollHeight;
-    setTextareaHeight(`${scrollHeight}px`);
+    if (textareaRef.current) {
+      const scrollHeight = textareaRef?.current?.scrollHeight;
+      setTextareaHeight(`${scrollHeight}px`);
+    }
   };
 
   useEffect(() => {
@@ -62,8 +64,8 @@ export default function Textarea({
               updateEmpty(e.target.value == '');
               onResize();
             }}
-            onFocus={e => updateFocused(true)}
-            onBlur={e => updateFocused(false)}
+            onFocus={() => updateFocused(true)}
+            onBlur={() => updateFocused(false)}
             className={classNames(styles.inputBoxField, styles.textareaField)}
           />
         </label>
