@@ -1,13 +1,19 @@
-import { useEffect, type RefObject } from 'react';
+import type { RefObject } from 'react';
+import { useEffect } from 'react';
 
 interface UseScrollArgs {
   containerRef: RefObject<HTMLElement | null>;
   slideRef: RefObject<HTMLElement | null>;
   setPhase: (phase: number) => void;
-  duration?: number; // если нужен для расчётов
+  useVisiblePhase?: boolean;
 }
 
-const useScroll = ({ containerRef, slideRef, setPhase, duration }: UseScrollArgs) => {
+export const useScroll = ({
+  containerRef,
+  slideRef,
+  setPhase,
+  useVisiblePhase = false,
+}: UseScrollArgs) => {
   useEffect(() => {
     let ticking = false;
 
@@ -22,10 +28,22 @@ const useScroll = ({ containerRef, slideRef, setPhase, duration }: UseScrollArgs
             const containerRect = container.getBoundingClientRect();
             const slideRect = slide.getBoundingClientRect();
 
-            const totalScrollable = slideRect.height - containerRect.height;
-            const offsetTop = slideRect.top - containerRect.top;
-            const scrolled = -offsetTop;
-            const phaseCalc = Math.min(Math.max(scrolled / totalScrollable, 0), 1);
+            let phaseCalc = 0;
+
+            if (!useVisiblePhase) {
+              // старая логика: top→top, bottom→bottom
+              const totalScrollable = slideRect.height - containerRect.height;
+              const offsetTop = slideRect.top - containerRect.top;
+              const scrolled = -offsetTop;
+              phaseCalc = Math.min(Math.max(scrolled / totalScrollable, 0), 1);
+            } else {
+              // новый режим: top слайда коснулся bottom контейнера → 0
+              // bottom слайда ушёл за top контейнера → 1
+              const totalScrollable = containerRect.height + slideRect.height;
+              const offsetTop = containerRect.top - slideRect.height;
+              const scrolled = -offsetTop;
+              phaseCalc = Math.min(Math.max(scrolled / totalScrollable, 0), 1);
+            }
 
             setPhase(phaseCalc);
           }
@@ -36,10 +54,8 @@ const useScroll = ({ containerRef, slideRef, setPhase, duration }: UseScrollArgs
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+    handleScroll(); // начальное вычисление
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [containerRef, slideRef, setPhase, duration]);
+  }, [containerRef, slideRef, setPhase, useVisiblePhase]);
 };
-
-export default useScroll;
