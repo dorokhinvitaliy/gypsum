@@ -1,10 +1,132 @@
-import { Slide, Slides, Transition } from '../../components/Animation/Animation';
+import { Slide, Slides, Transition, Animation } from '../../components/Animation/Animation';
 
 import { usePhase } from '../../components/Animation/usePhase';
+import Flex from '../../components/Flex/Flex';
+import Text from '../../components/Text/Text';
+
+const Helper = () => {
+  const phase = usePhase();
+  return (
+    <div>
+      <Transition
+        transitions={{
+          letterSpacing: {
+            from: 0,
+            to: 10,
+            phase: {
+              start: 0,
+              stop: 0.5,
+            },
+            pattern: '{}px',
+          },
+        }}
+      >
+        <span>Привет</span>
+      </Transition>
+      , а фаза такая: {phase}
+    </div>
+  );
+};
+
+const Phase = () => {
+  const phase = usePhase();
+  return <>{(phase * 100).toFixed(2)}</>;
+};
 
 const Animator = () => {
   return (
     <Slides>
+      <Slide duration={4}>
+        <Transition
+          transitions={{
+            scale: {
+              from: 1,
+              to: 3,
+              phase: {
+                start: 0.8,
+                stop: 1,
+              },
+            },
+          }}
+        >
+          <Flex
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+            style={{ height: '100%' }}
+          >
+            <Transition
+              transitions={{
+                opacity: {
+                  from: 0,
+                  to: 1,
+                  phase: {
+                    start: 0.1,
+                    stop: 0.3,
+                  },
+                },
+              }}
+            >
+              <Text variant="display-4" style={{ display: 'block', zIndex: 1 }}>
+                Привет
+              </Text>
+            </Transition>
+            <Transition
+              transitions={{
+                opacity: {
+                  from: 0,
+                  to: 1,
+                  phase: {
+                    start: 0,
+                    stop: 0.1,
+                  },
+                },
+                filter: {
+                  from: 0,
+                  to: 10,
+                  phase: {
+                    start: 0.1,
+                    stop: 0.3,
+                  },
+                  pattern: 'blur({}px)',
+                },
+              }}
+            >
+              <Text
+                variant="subheading-1"
+                style={{ display: 'block', transform: `translateY(${-50}px)` }}
+              >
+                Начнем знакомство?
+              </Text>
+            </Transition>
+            <Transition
+              transitions={{
+                translateY: {
+                  from: -50,
+                  to: 0,
+                  pattern: '{}px',
+                  phase: {
+                    start: 0.6,
+                    stop: 0.7,
+                  },
+                },
+                opacity: {
+                  from: 0,
+                  to: 1,
+                  phase: {
+                    start: 0.6,
+                    stop: 0.7,
+                  },
+                },
+              }}
+            >
+              <Text variant="subheading-1" style={{ display: 'block' }}>
+                Это Gypsum, с нами анимировать просто!
+              </Text>
+            </Transition>
+          </Flex>
+        </Transition>
+      </Slide>
       <Slide duration={2}>
         <Transition
           transitions={{
@@ -15,7 +137,7 @@ const Animator = () => {
                 start: 0,
                 stop: 0.3,
               },
-              pattern: '{}px', //необязательное свойство для нетривиальных css-свойств
+              pattern: '{}px',
             },
             rotate: {
               from: 0,
@@ -25,10 +147,12 @@ const Animator = () => {
             },
           }}
         >
-          <b className="red">Привет{usePhase().phase}!</b>
+          <div style={{ width: 'fit-content' }}>
+            <Helper></Helper>
+          </div>
         </Transition>
       </Slide>
-      <Slide duration={2}>
+      <Slide duration={2} visibleBounds style={{ background: 'red' }}>
         <Transition
           transitions={{
             scale: {
@@ -40,6 +164,25 @@ const Animator = () => {
         >
           <div className="red">Второй слайд!</div>
         </Transition>
+      </Slide>
+      <Slide duration={2}>
+        <Animation
+          animations={{
+            scale: { from: 0, to: 1, duration: 500, frame: 0.1, rewindable: false },
+            /*  opacity: { from: 0, to: 1, trigger: 'in-viewport', duration: 300, rewindable: true },
+            rotate: { from: 0, to: 360, duration: 1000, animationCount: 'infinite' }, */
+          }}
+        >
+          <div>Привет, мир!</div>
+        </Animation>
+      </Slide>
+      <Slide>
+        <Flex alignItems="center" justifyContent="center" direction="column" gap="1rem">
+          <div style={{ fontSize: '3rem' }}>Большой текст</div>
+          <div>
+            Фаза такова <Phase />
+          </div>
+        </Flex>
       </Slide>
     </Slides>
   );

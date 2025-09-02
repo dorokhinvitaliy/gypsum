@@ -90,8 +90,8 @@ export default function Home() {
             position="bottom"
             content={
               <Flex direction="column">
-                <Text variant="heading">Важное сообщение!</Text>
-                <Text variant="body">Уже всё...</Text>
+                <Text variant="heading-1">Важное сообщение!</Text>
+                <Text variant="body-1">Уже всё...</Text>
                 <Button flat>Ознакомлен</Button>
               </Flex>
             }
@@ -112,7 +112,7 @@ export default function Home() {
         <Modal open={open} onClose={() => setOpen(false)}>
           <Flex gap={10} direction="column">
             <Flex justifyContent="space-between" alignItems="center" style={{ width: '100%' }}>
-              <Text variant="heading">Заголовок модалки</Text>
+              <Text variant="heading-1">Заголовок модалки</Text>
               <Button flat onClick={() => setOpen(false)}>
                 X
               </Button>
