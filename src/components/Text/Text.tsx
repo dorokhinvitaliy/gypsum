@@ -15,6 +15,8 @@ export type TextVariant =
   | 'hint-1'
   | 'hint-2';
 
+export type TextColor = 'primary' | 'secondary' | 'tertiary' | 'disabled';
+
 import type { HTMLAttributes } from 'react';
 import styles from './Text.module.css';
 import classNames from 'classnames';
@@ -22,15 +24,24 @@ import classNames from 'classnames';
 export default function Text({
   children,
   variant = 'body-1',
+  color = 'primary',
   className,
   ...rest
 }: {
   children: React.ReactNode;
   variant?: TextVariant;
+  color?: TextColor;
   className?: string;
 } & HTMLAttributes<HTMLSpanElement>) {
   return (
-    <span className={classNames(styles['text-variant-' + variant], className)} {...rest}>
+    <span
+      className={classNames(
+        styles['text-variant-' + variant],
+        styles['text-color-' + color],
+        className,
+      )}
+      {...rest}
+    >
       {children}
     </span>
   );
