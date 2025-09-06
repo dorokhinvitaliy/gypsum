@@ -1,8 +1,8 @@
-"use client";
-import React, { useEffect, useRef, useState } from "react";
-import classNames from "classnames";
-import { ExclamationTriangleIcon } from "@heroicons/react/24/solid";
-import styles from "./Input.module.css"; // Можно переименовать, если нужно
+'use client';
+import React, { useEffect, useRef, useState } from 'react';
+import classNames from 'classnames';
+import { ExclamationTriangleIcon } from '@heroicons/react/24/solid';
+import styles from './Input.module.scss'; // Можно переименовать, если нужно
 
 type UploaderProps = {
   id: string;
@@ -16,7 +16,7 @@ type UploaderProps = {
 export default function Uploader({
   id,
   name,
-  placeholder = "Загрузите файл",
+  placeholder = 'Загрузите файл',
   onChange,
   helperText,
   validate,
@@ -24,22 +24,22 @@ export default function Uploader({
   const [focused, setFocused] = useState(false);
   const [empty, setEmpty] = useState(true);
   const [status, setStatus] = useState(false);
-  const [fileName, setFileName] = useState<string>("");
+  const [fileName, setFileName] = useState<string>('');
   const tipRef = useRef(null);
-  const [tipHeight, setTipHeight] = useState("0px");
+  const [tipHeight, setTipHeight] = useState('0px');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
-    setFileName(file ? file.name : "");
+    setFileName(file ? file.name : '');
     setEmpty(!file);
     onChange(file);
 
-    if(validate){
-        if (validate(file)) {
-            setStatus(true); // true = ошибка
-          }else{
-            setStatus(false);
-          }
+    if (validate) {
+      if (validate(file)) {
+        setStatus(true); // true = ошибка
+      } else {
+        setStatus(false);
+      }
     }
   };
 
@@ -48,7 +48,7 @@ export default function Uploader({
       const scrollHeight = (tipRef.current as HTMLElement).scrollHeight;
       setTipHeight(`${scrollHeight}px`);
     } else {
-      setTipHeight("0px");
+      setTipHeight('0px');
     }
   }, [focused, helperText]);
 
@@ -76,7 +76,7 @@ export default function Uploader({
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
           className={styles.inputBoxField}
-          style={{height: "0px!important"}}
+          style={{ height: '0px!important' }}
         />
 
         {fileName && <div className={styles.inputBoxFileName}>{fileName}</div>}
@@ -84,20 +84,16 @@ export default function Uploader({
         {status && (
           <ExclamationTriangleIcon
             className={classNames(
-              "w-5 h-5 text-red-500 stroke-5",
+              'w-5 h-5 text-red-500 stroke-5',
               styles.inputBoxIcon,
-              styles.warn
+              styles.warn,
             )}
           />
         )}
       </div>
 
       {helperText && (
-        <div
-          ref={tipRef}
-          style={{ height: tipHeight }}
-          className={styles.inputBox_tip}
-        >
+        <div ref={tipRef} style={{ height: tipHeight }} className={styles.inputBox_tip}>
           <div>{helperText}</div>
         </div>
       )}

@@ -2,7 +2,7 @@
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 
-import styles from './Input.module.css';
+import styles from './Input.module.scss';
 
 import type { Option } from './Select.type.ts';
 

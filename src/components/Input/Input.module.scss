@@ -1,0 +1,229 @@
+@use '../../styles/variables' as *;
+@use 'sass:color';
+
+.inputBox_container,
+.selectBox_container {
+  .inputBox_tip {
+    overflow: hidden;
+    height: 0;
+    width: 100%;
+    font-size: 0.7rem;
+    color: #767676;
+    transition: all 0.3s ease;
+    div {
+      padding: 1rem;
+    }
+  }
+  .inputBoxIcon {
+    width: 20px;
+    height: 20px;
+    opacity: 0.6;
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1.2rem;
+    transition: all 0.3s ease;
+  }
+  &.tipActive {
+    background: #80808024;
+    border-radius: 1rem;
+  }
+  min-width: 300px;
+  &.maxContainer {
+    width: 100%;
+  }
+  .inputBox {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    background-color: var(--gy-color-field);
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+    height: 62px !important;
+    justify-content: center;
+    z-index: 1;
+
+    &.autoHeight {
+      height: auto !important;
+    }
+
+    &.active {
+      box-shadow: inset 0 0 0px 2px $gy-color-brand;
+      background-color: $gy-color-bg;
+    }
+
+    &:not(.active) {
+      &:hover {
+        background-color: #d9d9d994;
+      }
+    }
+
+    .inputBoxLabel {
+      span {
+        user-select: none;
+        display: block;
+        font-size: 0.7rem;
+        color: $gy-text-color-secondary;
+        transition: all 0.3s ease;
+      }
+    }
+
+    .inputBoxField {
+      width: 100%;
+      height: 24px;
+      margin: 0;
+      display: block;
+      outline: none !important;
+      color: #000;
+      border: none;
+      padding: 0;
+      background: none;
+      transition: height 0.3s ease;
+    }
+    .textareaField {
+      min-height: 24px;
+      resize: none;
+      overflow: hidden;
+      transition: none;
+    }
+
+    &.empty:not(.active) {
+      .inputBoxField {
+        height: 0;
+      }
+
+      .inputBoxLabel {
+        span {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
+
+.selectBox_container {
+  position: relative;
+
+  .inputBox {
+    padding-right: 3rem;
+  }
+
+  .selectBox {
+    cursor: pointer;
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    &.active {
+      & + .selectBox_options {
+        opacity: 1;
+        margin-top: 0.5rem;
+      }
+    }
+
+    .inputBoxField {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &.active {
+      & > .inputBoxIcon {
+        transform: rotate(180deg) translateY(50%);
+      }
+    }
+
+    &.empty {
+      .inputBoxLabel {
+        font-size: 1rem;
+      }
+
+      &:not(.active) {
+        .inputBoxField {
+          height: 0;
+        }
+      }
+    }
+  }
+
+  &.floating {
+    .selectBox_options {
+      position: absolute;
+      width: 100%;
+    }
+  }
+
+  .selectBox_options {
+    padding: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin-top: 0;
+    background-color: #dadada61;
+    border-radius: 1rem;
+    backdrop-filter: blur(20px);
+    z-index: 4;
+    transition: all 0.3s ease;
+    .optionsGroup {
+      padding: 0.3rem;
+      .selectBox_option {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        max-width: 100%;
+        padding: 1rem;
+        border-radius: 0.7rem;
+        user-select: none;
+        transition: all 0.3s ease;
+
+        &:active {
+          transform: scale(0.95);
+        }
+
+        &:not(:last-child) {
+          margin-bottom: 0.25rem;
+        }
+
+        &:not(.selected) {
+          &:hover {
+            background-color: #b3b3b33a;
+          }
+        }
+
+        &.selected {
+          background-color: color.adjust($gy-color-brand, $alpha: -0.9);
+          color: $gy-color-brand;
+          .optionIcon {
+            transform: translateX(0) scale(1);
+          }
+        }
+
+        .optionIcon {
+          width: 20px;
+          height: 20px;
+          color: $gy-color-brand;
+          transform: translateX(1rem) scale(0);
+          transition: all 0.3s ease;
+        }
+      }
+    }
+  }
+}
+
+.warn {
+  animation: appearing 0.3s ease;
+  opacity: 0.9;
+}
+
+@keyframes appearing {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1) translateY(-50%);
+  }
+}

@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 
-import styles from './Input.module.css';
+import styles from './Input.module.scss';
 
 export default function Textarea({
   value,
