@@ -1,0 +1,15 @@
+.codeBlock_wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+
+  .codeBlock {
+    background-color: rgb(240 240 240 / 47%) !important;
+  }
+
+  .copy {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+  }
+}
