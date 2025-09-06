@@ -1,0 +1,28 @@
+.wrapper {
+  position: relative;
+
+  .helperTooltip {
+    position: absolute;
+    top: 50%;
+    left: calc(100% - 0.5rem);
+    padding: 0.5rem 1rem;
+    background-color: #747bff1f;
+    backdrop-filter: blur(12px);
+    color: #747bff;
+    border-radius: 0.5rem;
+    transform: translateY(-50%);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    :not(.hidden) {
+      &.helperTooltip {
+        left: calc(100% + 0.5rem);
+        pointer-events: all;
+        opacity: 1;
+      }
+    }
+  }
+}
