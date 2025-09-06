@@ -1,6 +1,18 @@
 .disclosure {
   gap: 0;
   transition: all 0.3s ease;
+
+  &.maxWidth {
+    width: 100%;
+  }
+
+  &.filled {
+    .summary {
+      &:hover {
+        background-color: #6c6c6c1b;
+      }
+    }
+  }
   &.opened {
     gap: 0.5rem;
   }
@@ -17,9 +29,6 @@
     transition: all 0.3s ease;
     &:active {
       transform: scale(0.95);
-    }
-    &:hover {
-      background-color: #6c6c6c1b;
     }
     &.opened {
       color: #000;

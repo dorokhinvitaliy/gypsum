@@ -11,18 +11,26 @@ const DisclosureContext = createContext<{ opened: boolean; setOpened: (arg0: boo
 
 const Disclosure = ({
   summary,
+  filled,
   children,
+  width,
   ...rest
 }: {
   summary: React.ReactNode;
+  filled?: boolean;
   children: React.ReactNode;
+  width?: 'max' | 'auto' | number;
 } & HTMLAttributes<HTMLDivElement>) => {
   const [opened, setOpened] = useState(false);
   return (
     <DisclosureContext value={{ opened, setOpened }}>
       <Flex
         direction="column"
-        className={classNames(styles.disclosure, { [styles.opened]: opened })}
+        className={classNames(styles.disclosure, {
+          [styles.opened]: opened,
+          [styles.filled]: filled,
+          [styles.maxWidth]: width === 'max',
+        })}
         {...rest}
       >
         <Summary>{summary}</Summary>
@@ -39,6 +47,7 @@ const Summary = ({ children }: { children: React.ReactNode }) => {
     <Flex
       justifyContent="space-between"
       alignItems="center"
+      gap={8}
       className={styles.summary}
       onClick={() => setOpened(!opened)}
     >
