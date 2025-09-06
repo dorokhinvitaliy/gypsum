@@ -1,8 +1,7 @@
-import { Slide, Slides, Transition, Animation } from '../../components/Animation/Animation';
+import { Button, Card, Flex, Text } from '@/components';
+import { Slide, Slides, Transition, Animation } from '@/components/Animation/Animation';
 
-import { usePhase } from '../../components/Animation/usePhase';
-import Flex from '../../components/Flex/Flex';
-import Text from '../../components/Text/Text';
+import { usePhase } from '@/components/Animation/usePhase';
 
 const Helper = () => {
   const phase = usePhase();
@@ -24,6 +23,7 @@ const Helper = () => {
         <span>Привет</span>
       </Transition>
       , а фаза такая: {phase}
+      <Button>Кнопка</Button>
     </div>
   );
 };
@@ -127,6 +127,31 @@ const Animator = () => {
           </Flex>
         </Transition>
       </Slide>
+      <Slide>
+        <Transition
+          transitions={{
+            opacity: {
+              from: 0,
+              to: 1,
+              phase: {
+                start: 0.3,
+                stop: 0.4,
+              },
+            },
+            translateX: {
+              from: -20,
+              to: 0,
+              phase: {
+                start: 0.3,
+                stop: 0.4,
+              },
+              pattern: '{}px',
+            },
+          }}
+        >
+          <Card>ghbdtn</Card>
+        </Transition>
+      </Slide>
       <Slide duration={2}>
         <Transition
           transitions={{
@@ -168,7 +193,7 @@ const Animator = () => {
       <Slide duration={2}>
         <Animation
           animations={{
-            scale: { from: 0, to: 1, duration: 500, frame: 0.1, rewindable: false },
+            scale: { from: 0, to: 1, duration: 1500, frame: 0.3, rewindable: false },
             /*  opacity: { from: 0, to: 1, trigger: 'in-viewport', duration: 300, rewindable: true },
             rotate: { from: 0, to: 360, duration: 1000, animationCount: 'infinite' }, */
           }}
