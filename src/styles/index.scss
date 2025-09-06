@@ -6,12 +6,16 @@
 
 :root {
   /* Брендовые цвета */
-  --gy-color-brand: #2558CF;
+  --gy-color-brand: #2558cf;
   --gy-color-brand-hover: #1f4bb0;
   --gy-color-brand-semi-transparent: #2558cf6e;
+  --gy-color-brand-almost-transparent: #2558cf42;
   --gy-color-brand-transparent: #2558cf1e;
   --gy-color-brand-active: #193d91;
   --gy-color-brand-subtle: #e7edfb;
+
+  --gy-color-normal: #d1d5db;
+  --gy-color-normal-hover: #d1d5db;
 
   /* Нейтральные цвета */
   --gy-color-bg: #ffffff;
@@ -22,9 +26,14 @@
   --gy-color-surface: #ffffff;
   --gy-color-surface-alt: #fafbfc;
 
+  /* Цвета полей ввода */
+  --gy-color-field: #d9d9d966; /* основной текст */
+  --gy-color-field-hover: #b3b3b33a; /* менее важный текст */
+  --gy-color-field-disabled: #b3b3b33a;
+
   /* Текстовые цвета */
   --gy-text-color-primary: #111827; /* основной текст */
-  --gy-text-color-secondary: #374151; /* менее важный текст */
+  --gy-text-color-secondary: #868d96; /* менее важный текст */
   --gy-text-color-tertiary: #6b7280; /* подсказки */
   --gy-text-color-disabled: #9ca3af;
 
@@ -67,14 +76,13 @@
   --gy-transition-slow: 500ms;
 }
 
-
 :root {
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(0, 0, 0, 0.87);
-  background-color: #f0f0f0;
+  background-color: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -83,7 +91,7 @@
 }
 
 body {
-    font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 a {
@@ -119,7 +127,7 @@ button {
   cursor: pointer;
 
   /* для доступности */
-  -webkit-tap-highlight-color: transparent; 
+  -webkit-tap-highlight-color: transparent;
 }
 
 button:focus,

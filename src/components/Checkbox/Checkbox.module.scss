@@ -1,3 +1,6 @@
+@use '../../styles/variables' as *;
+@use 'sass:color';
+
 .checkbox-container {
   display: flex;
   width: 100%;
@@ -18,28 +21,28 @@
 
   &:hover {
     .checkbox {
-      box-shadow: inset 0 0 0 2px #2558cfce;
+      box-shadow: inset 0 0 0 2px $gy-color-brand;
     }
   }
 
   &.filled {
-    background: #2658cf1f;
+    background: color.adjust($gy-color-brand, $alpha: -0.9);
     padding: 1rem;
     border-radius: 0.5rem;
     &:active {
       transform: scale(0.95);
     }
     &:hover {
-      background: #2659cf2b;
+      background: color.adjust($gy-color-brand, $alpha: -0.8);
     }
   }
 
   .checkbox {
     width: 20px;
     height: 20px;
-    box-shadow: inset 0 0 0 2px #2558cf8b;
+    box-shadow: inset 0 0 0 2px color.adjust($gy-color-brand, $alpha: -0.5);
     border-radius: 0.4rem;
-    color: #fff;
+    color: var(--gy-color-bg);
     transition: all 0.3s ease;
     &.checked {
       .checkbox-icon {
@@ -58,8 +61,8 @@
     justify-content: center;
     border-radius: 0.4rem;
     transform: scale(0.2);
-    background-color: #2558cf;
-    color: #fff;
+    background-color: $gy-color-brand;
+    color: $gy-color-bg;
     transition: all 0.3s ease;
   }
 
