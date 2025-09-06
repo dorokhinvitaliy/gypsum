@@ -2,7 +2,7 @@ import type { HTMLAttributes, ReactNode, CSSProperties } from 'react';
 import styles from './Flex.module.css';
 import classNames from 'classnames';
 
-type FlexProps = {
+export type FlexProps = {
   direction?: CSSProperties['flexDirection'];
   justifyContent?: CSSProperties['justifyContent'];
   alignItems?: CSSProperties['alignItems'];
@@ -11,7 +11,7 @@ type FlexProps = {
   className?: string;
 } & HTMLAttributes<HTMLDivElement>;
 
-export default function Flex({
+const Flex = ({
   direction,
   justifyContent,
   alignItems,
@@ -20,7 +20,7 @@ export default function Flex({
   style,
   className,
   ...rest
-}: FlexProps) {
+}: FlexProps) => {
   return (
     <div
       className={classNames(styles.flex, className)}
@@ -36,4 +36,16 @@ export default function Flex({
       {children}
     </div>
   );
-}
+};
+
+export default Flex;
+
+const Col = ({ children, ...props }: { children: React.ReactNode } & FlexProps) => {
+  return (
+    <Flex direction="column" {...props}>
+      {children}
+    </Flex>
+  );
+};
+
+export { Col };
