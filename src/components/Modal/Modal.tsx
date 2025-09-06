@@ -8,10 +8,12 @@ export default function Modal({
   open,
   children,
   onClose,
+  useClickOutside,
 }: {
   open: boolean;
   children: React.ReactNode;
   onClose: () => void;
+  useClickOutside?: boolean;
 }) {
   const [isVisible, setIsVisible] = useState<boolean>(open);
   useEffect(() => {
@@ -31,7 +33,7 @@ export default function Modal({
         [styles.modalOpen]: open,
         [styles.modalClosed]: !open,
       })}
-      onClick={onClose}
+      onClick={useClickOutside ? onClose : () => false}
     >
       <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
         {children}
