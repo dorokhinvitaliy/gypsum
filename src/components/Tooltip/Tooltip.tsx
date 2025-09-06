@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
 import styles from './Tooltip.module.css';
@@ -7,7 +7,7 @@ type TooltipProps = {
   content: React.ReactNode;
   position?: 'top' | 'bottom' | 'left' | 'right';
   children: React.ReactNode;
-  delay?: number;
+  delay?: number; // debounce open delay
   hasArrow?: boolean;
 };
 
@@ -15,7 +15,7 @@ export default function Tooltip({
   children,
   content,
   position = 'top',
-  delay = 100,
+  delay = 500,
   hasArrow = true,
 }: TooltipProps) {
   const [visible, setVisible] = useState(false);
@@ -25,14 +25,17 @@ export default function Tooltip({
 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
+  const openTimerRef = useRef<number | null>(null);
 
-  const calculatePosition = () => {
+  const calculatePosition = useCallback(() => {
     if (!wrapperRef.current || !tooltipRef.current) return;
 
     const wrapperRect = wrapperRef.current.getBoundingClientRect();
     const tooltipRect = tooltipRef.current.getBoundingClientRect();
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
+    const scrollX = window.pageXOffset || document.documentElement.scrollLeft || 0;
+    const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
 
     let newPlacement = position;
     let top = 0;
@@ -75,49 +78,95 @@ export default function Tooltip({
     // Вычисляем координаты
     switch (newPlacement) {
       case 'top':
-        top = wrapperRect.top - tooltipRect.height - 8;
-        left = wrapperRect.left + wrapperRect.width / 2 - tooltipRect.width / 2;
+        top = wrapperRect.top + scrollY - tooltipRect.height - 8;
+        left = wrapperRect.left + scrollX + wrapperRect.width / 2 - tooltipRect.width / 2;
         break;
       case 'bottom':
-        top = wrapperRect.bottom + 8;
-        left = wrapperRect.left + wrapperRect.width / 2 - tooltipRect.width / 2;
+        top = wrapperRect.bottom + scrollY + 8;
+        left = wrapperRect.left + scrollX + wrapperRect.width / 2 - tooltipRect.width / 2;
         break;
       case 'left':
-        top = wrapperRect.top + wrapperRect.height / 2 - tooltipRect.height / 2;
-        left = wrapperRect.left - tooltipRect.width - 8;
+        top = wrapperRect.top + scrollY + wrapperRect.height / 2 - tooltipRect.height / 2;
+        left = wrapperRect.left + scrollX - tooltipRect.width - 8;
         break;
       case 'right':
-        top = wrapperRect.top + wrapperRect.height / 2 - tooltipRect.height / 2;
-        left = wrapperRect.right + 8;
+        top = wrapperRect.top + scrollY + wrapperRect.height / 2 - tooltipRect.height / 2;
+        left = wrapperRect.right + scrollX + 8;
         break;
     }
 
     setPlacement(newPlacement);
     setCoords({ top, left });
-  };
+  }, [position]);
 
   const handleShow = () => {
     setVisible(true);
-    setTimeout(() => setShowing(true), 10);
+    // micro delay to allow mount transitions
+    window.setTimeout(() => setShowing(true), 10);
   };
 
   const handleHide = () => {
+    // cancel pending open
+    if (openTimerRef.current) {
+      window.clearTimeout(openTimerRef.current);
+      openTimerRef.current = null;
+    }
     setShowing(false);
     setTimeout(() => setVisible(false), 200);
   };
 
+  // Debounced open on hover
+  const onMouseEnter = () => {
+    if (openTimerRef.current) {
+      window.clearTimeout(openTimerRef.current);
+      openTimerRef.current = null;
+    }
+    openTimerRef.current = window.setTimeout(
+      () => {
+        handleShow();
+        openTimerRef.current = null;
+      },
+      Math.max(0, delay),
+    );
+  };
+
+  const onMouseLeave = () => {
+    handleHide();
+  };
+
   useEffect(() => {
-    if (visible) calculatePosition();
-    window.addEventListener('resize', calculatePosition);
-    return () => window.removeEventListener('resize', calculatePosition);
-  }, [visible, content]);
+    if (!visible) return;
+
+    const recalc = () => {
+      // rAF to avoid layout thrash on rapid scroll
+      window.requestAnimationFrame(() => calculatePosition());
+    };
+
+    calculatePosition();
+    window.addEventListener('resize', recalc, { passive: true } as AddEventListenerOptions);
+    window.addEventListener('scroll', recalc, { passive: true } as AddEventListenerOptions);
+
+    return () => {
+      window.removeEventListener('resize', recalc as EventListener);
+      window.removeEventListener('scroll', recalc as EventListener);
+    };
+  }, [visible, content, calculatePosition]);
+
+  useEffect(() => {
+    return () => {
+      if (openTimerRef.current) {
+        window.clearTimeout(openTimerRef.current);
+        openTimerRef.current = null;
+      }
+    };
+  }, []);
 
   return (
     <div
       ref={wrapperRef}
       className={classNames(styles.tooltipWrapper)}
-      onMouseEnter={() => setTimeout(handleShow, delay)}
-      onMouseLeave={handleHide}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       {children}
 
