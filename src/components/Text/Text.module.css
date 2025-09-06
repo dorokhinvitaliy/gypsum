@@ -113,3 +113,7 @@
 .text-color-disabled {
     color: var(--gy-text-color-disabled);
 }
+
+.text-color-inherit {
+  color: inherit;
+}

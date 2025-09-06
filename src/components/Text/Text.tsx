@@ -1,25 +1,7 @@
-export type TextVariant =
-  | 'display-1'
-  | 'display-2'
-  | 'display-3'
-  | 'display-4'
-  | 'heading-1'
-  | 'heading-2'
-  | 'heading-3'
-  | 'subheading-1'
-  | 'subheading-2'
-  | 'body-1'
-  | 'body-2'
-  | 'caption'
-  | 'overline'
-  | 'hint-1'
-  | 'hint-2';
-
-export type TextColor = 'primary' | 'secondary' | 'tertiary' | 'disabled';
-
 import type { HTMLAttributes } from 'react';
 import styles from './Text.module.css';
 import classNames from 'classnames';
+import type { TextColor, TextVariant } from './Text.types';
 
 export default function Text({
   children,
