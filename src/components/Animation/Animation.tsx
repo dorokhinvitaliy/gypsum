@@ -54,16 +54,21 @@ const Transition = ({
   children,
   transitions,
 }: {
-  children: React.ReactNode;
+  children: React.ReactElement<{ style?: React.CSSProperties }>;
   transitions: Transitions;
 }) => {
   const { phase } = useContext(SlideContext);
   const styles = useTransition({ phase, transitions });
   if (phase === -1)
-    return 'You cannot use Transition separately from Slide component because it uses the phase of scrolling.';
+    return (
+      <span>
+        You cannot use Transition separately from Slide component because it uses the phase of
+        scrolling.
+      </span>
+    );
   return React.cloneElement(children, {
     style: {
-      ...(children?.props.style || {}),
+      ...(children.props?.style || {}),
       ...styles,
     },
   });
@@ -73,7 +78,7 @@ export { Transition };
 
 type AnimationProps = {
   animations: Animations;
-  children: React.ReactNode;
+  children: React.ReactElement<{ style?: React.CSSProperties } & { ref?: React.Ref<unknown> }>;
 };
 
 const Animation = ({ animations, children }: AnimationProps) => {
@@ -82,7 +87,7 @@ const Animation = ({ animations, children }: AnimationProps) => {
 
   return React.cloneElement(children, {
     style: {
-      ...(children?.props.style || {}),
+      ...(children.props?.style || {}),
       ...styles,
     },
     ref: ref,
