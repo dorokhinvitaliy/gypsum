@@ -6,14 +6,14 @@
   height: fit-content;
   font-size: 1rem;
   padding: 0.7rem 2rem;
-  background-color: $gy-color-brand;
-  color: $gy-color-bg;
+  background-color: var(--gy-color-brand);
+  color: var(--gy-color-bg);
   border-radius: 0.8rem;
   width: fit-content;
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: color.adjust($gy-color-brand, $lightness: -10%);
+    background-color: color-mix(in srgb, var(--gy-color-brand), black 20%);
   }
 
   &:active {
@@ -26,41 +26,53 @@
 
   &.theme- {
     &secondary {
-      background-color: color.adjust($gy-color-brand, $alpha: -$gy-secondary-ratio);
-      color: $gy-color-brand;
+      background-color: color-mix(in srgb, var(--gy-color-brand), transparent 90%);
+      color: var(--gy-color-brand);
 
       &:hover {
-        background-color: color.adjust($gy-color-brand, $alpha: -$gy-secondary-hover-ratio);
+        background-color: color-mix(in srgb, var(--gy-color-brand), transparent 80%);
       }
     }
 
     &normal {
-      background-color: $gy-color-normal;
-      color: $gy-text-color-secondary;
+      background-color: var(--gy-color-normal);
+      color: var(--gy-text-color-secondary);
 
       &:hover {
-        background-color: color.adjust($gy-color-normal, $lightness: -10%);
-        color: $gy-text-color-secondary;
+        background-color: color-mix(in srgb, var(--gy-color-normal), #000 10%);
+        color: var(--gy-text-color-secondary);
       }
     }
 
     &normal-flat {
       background-color: transparent;
-      color: $gy-text-color-secondary;
+      color: var(--gy-text-color-secondary);
 
       &:hover {
-        background-color: color.adjust($gy-color-normal, $lightness: -10%);
-        color: $gy-text-color-secondary;
+        background-color: color-mix(in srgb, var(--gy-color-normal), transparent 30%);
+        color: var(--gy-text-color-secondary);
       }
     }
 
     &flat {
-      color: $gy-color-brand;
+      color: var(--gy-color-brand);
       background: transparent;
 
       &:hover {
-        background-color: color.adjust($gy-color-brand, $alpha: -$gy-secondary-ratio);
+        background-color: color-mix(in srgb, var(--gy-color-brand), transparent 90%);
       }
+    }
+
+    &reverted {
+      background-color: #fff;
+      color: var(--gy-color-brand);
+      &:hover {
+        background-color: #ffffff8e;
+      }
+    }
+
+    &reverted-secondary {
+      color: #fff;
     }
   }
 
@@ -80,9 +92,9 @@
     }
 
     &m {
-      padding: 0.7rem 1rem;
+      padding: 0.5em 1rem;
       &.iconOnly {
-        padding: 0.7rem;
+        padding: 0.5rem;
       }
     }
 

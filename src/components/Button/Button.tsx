@@ -2,7 +2,15 @@ import classNames from 'classnames';
 import React from 'react';
 import styles from './Button.module.scss';
 
-type ButtonTheme = 'primary' | 'secondary' | 'normal' | 'normal-flat' | 'flat' | 'outlined';
+type ButtonTheme =
+  | 'primary'
+  | 'secondary'
+  | 'normal'
+  | 'normal-flat'
+  | 'flat'
+  | 'outlined'
+  | 'reverted'
+  | 'reverted-secondary';
 
 export type ButtonProps = {
   children: React.ReactNode;
