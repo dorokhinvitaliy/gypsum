@@ -1,11 +1,10 @@
 import { Aside, Text } from '@/components';
 import { Logo, HomeSolid, FlaskSolid, ExploreSolid } from '@/components/Icons';
-import styles from './Layout.module.scss';
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <Aside renderContent={<div className={styles.main}>{children}</div>}>
-      <Aside.Item icon={Logo} iconSize={32} style={{ margin: '0 auto', color: '#747bff' }}>
-        <Text variant="body-1" color="inherit">
+    <Aside renderContent={children}>
+      <Aside.Item icon={Logo} iconSize={40} style={{ margin: '0 auto', color: '#747bff' }}>
+        <Text variant="subheading-2" color="inherit">
           GypsumUI
         </Text>
       </Aside.Item>

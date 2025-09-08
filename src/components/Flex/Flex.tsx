@@ -7,6 +7,7 @@ export type FlexProps = {
   justifyContent?: CSSProperties['justifyContent'];
   alignItems?: CSSProperties['alignItems'];
   gap?: string | number;
+  wrap?: CSSProperties['flexWrap'];
   children: ReactNode;
   className?: string;
 } & HTMLAttributes<HTMLDivElement>;
@@ -16,6 +17,7 @@ const Flex = ({
   justifyContent,
   alignItems,
   gap,
+  wrap,
   children,
   style,
   className,
@@ -29,6 +31,7 @@ const Flex = ({
         justifyContent,
         alignItems,
         gap,
+        flexWrap: wrap,
         ...style,
       }}
       {...rest}
@@ -42,7 +45,7 @@ export default Flex;
 
 const Col = ({ children, ...props }: { children: React.ReactNode } & FlexProps) => {
   return (
-    <Flex direction="column" {...props}>
+    <Flex direction="column" wrap="nowrap" {...props}>
       {children}
     </Flex>
   );
