@@ -96,7 +96,7 @@ export default function Home() {
               <Text>Тело карточки</Text>
               <Flex gap={8}>
                 <Button>В корзину</Button>
-                <Button normal>Удалить</Button>
+                <Button theme="normal">Удалить</Button>
               </Flex>
             </Card>{' '}
             <Card gap={16} style={{ width: '400px', backgroundColor: '#18a4ef10' }}>
@@ -104,7 +104,7 @@ export default function Home() {
               <Text>Тело карточки</Text>
               <Flex gap={8}>
                 <Button>В корзину</Button>
-                <Button normal>Удалить</Button>
+                <Button theme="normal">Удалить</Button>
               </Flex>
             </Card>{' '}
             <Card gap={16} style={{ width: '400px', backgroundColor: '#18a4ef10' }}>
@@ -112,7 +112,7 @@ export default function Home() {
               <Text>Тело карточки</Text>
               <Flex gap={8}>
                 <Button>В корзину</Button>
-                <Button normal>Удалить</Button>
+                <Button theme="normal">Удалить</Button>
               </Flex>
             </Card>{' '}
           </Flex>

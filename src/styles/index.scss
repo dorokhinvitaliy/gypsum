@@ -14,7 +14,7 @@
   --gy-color-brand-active: #193d91;
   --gy-color-brand-subtle: #e7edfb;
 
-  --gy-color-normal: #d1d5db;
+  --gy-color-normal: #d1d5db5f;
   --gy-color-normal-hover: #d1d5db;
 
   /* Нейтральные цвета */
@@ -146,4 +146,11 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+code {
+  font-family: monospace;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.5rem;
+  background-color: color-mix(in srgb, var(--gy-color-brand), transparent 90%);
 }
