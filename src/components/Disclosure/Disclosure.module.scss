@@ -8,6 +8,7 @@
 
   &.filled {
     .summary {
+      width: auto;
       &:hover {
         background-color: #6c6c6c1b;
       }
@@ -23,6 +24,7 @@
 
   .summary {
     cursor: pointer;
+    width: fit-content;
     padding: 1rem;
     color: #6c6c6c;
     border-radius: 1rem;

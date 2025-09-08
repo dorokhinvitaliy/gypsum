@@ -6,14 +6,14 @@ import CopyOutline from '../Icons/Copy';
 import Icon from '../Icons/Icon/Icon';
 import Button from '../Button';
 
-const Code = ({ code }: { code: string }) => (
+const Code = ({ code, lang }: { code: string; lang?: string }) => (
   <div className={styles.codeBlock_wrapper}>
     <Button size="s" theme="normal-flat" className={styles.copy}>
       <Icon data={CopyOutline} />
       Копировать
     </Button>
 
-    <Highlight code={code.trim()} language="tsx" theme={themes.gruvboxMaterialLight}>
+    <Highlight code={code.trim()} language={lang ?? 'tsx'} theme={themes.gruvboxMaterialLight}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre
           className={classNames(className, styles.codeBlock)}
