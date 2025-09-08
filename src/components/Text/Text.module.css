@@ -1,24 +1,24 @@
 /* Экранные */
 .text-variant-display-1 {
-  font-size: 3rem;     /* ~48px */
+  font-size: 4.5rem;     /* ~48px */
   font-weight: 700;
   line-height: 1.1;
 }
 
 .text-variant-display-2 {
-  font-size: 3.5rem;   /* ~56px */
+  font-size: 4rem;   /* ~56px */
   font-weight: 700;
   line-height: 1.1;
 }
 
 .text-variant-display-3 {
-  font-size: 4rem;     /* ~64px */
+  font-size: 3.5rem;     /* ~64px */
   font-weight: 700;
   line-height: 1.05;
 }
 
 .text-variant-display-4 {
-  font-size: 4.5rem;   /* ~72px */
+  font-size: 3rem;   /* ~72px */
   font-weight: 700;
   line-height: 1.05;
 }
