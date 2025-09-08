@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from 'react';
-import styles from './Text.module.css';
+import styles from './Text.module.scss';
 import classNames from 'classnames';
 import type { TextColor, TextVariant } from './Text.types';
 

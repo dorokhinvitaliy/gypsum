@@ -33,6 +33,14 @@ export const textVariants = [
   'hint-2',
 ] as const;
 
-export type TextColor = 'primary' | 'secondary' | 'tertiary' | 'disabled' | 'inherit';
+export type TextColor =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'disabled'
+  | 'inherit'
+  | 'primary-reverted'
+  | 'secondary-reverted'
+  | 'brand';
 
 export const textColors = ['primary', 'secondary', 'tertiary', 'disabled', 'inherit'] as const;
