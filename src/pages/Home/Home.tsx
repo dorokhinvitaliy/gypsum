@@ -1,220 +1,306 @@
-import { useState } from 'react';
 import {
-  Input,
-  Select,
-  Button,
-  Modal,
   Text,
-  Tooltip,
-  Loader,
-  Textarea,
-  Disclosure,
-  Code,
+  Slides,
+  Slide,
+  Transition,
+  Animation,
+  Col,
+  Flex,
+  Button,
+  Card,
   Icon,
+  Link,
+  Anchor,
 } from '@/components';
-import Flex, { Col } from '@/components/Flex/Flex';
-import type { Option } from '@/components/Input/Select.type';
-import { textVariants } from '@/components/Text/Text.types';
-import Card from '@/components/Card/Card';
-import Checkbox, { CheckboxGroup } from '@/components/Checkbox/Checkbox';
-import CopyOutline from '@/components/Icons/Copy';
+import CaretRightOutline from '@/components/Icons/CaretRightOutline';
+
+import styles from './Home.module.scss';
+import Stars from './Stars';
 
 export default function Home() {
-  const [value, setValue] = useState('');
-  const [longValue, setLongValue] = useState('');
-  const [selected, setSelected] = useState<Option | null>(null);
-  const [selectedM, setSelectedM] = useState<Option[]>([]);
-  const [checked, setChecked] = useState<boolean>(true);
-  const [open, setOpen] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const codeBlock = `
-<Flex gap=".5rem">
-  <Button size="xl">Большая - XL</Button>
-  <Button size="l">Стандартная - L</Button>
-  <Button size="m">Средняя - M</Button>
-  <Button size="s">Маленькая - S</Button>
-  <Button size="xs">Крошечная - XS</Button>
-  <Button size="l">
-    <Icon data={CopyOutline} />
-  </Button>
-</Flex>
-`;
-  const options: Option[] = [
-    { id: 1, text: 'Элемент 1 списка' },
-    { id: 2, text: 'Второй элемент списка' },
-    { id: 3, text: 'Третий элемент списка' },
-  ];
-
   return (
-    <>
-      <Flex
-        direction="column"
-        alignItems="center"
-        gap="1rem"
-        style={{ padding: '1rem', margin: '0 auto', maxWidth: '600px', position: 'relative' }}
-      >
-        <Disclosure summary="Нажми, чтобы развернуть содержимое">
-          <CheckboxGroup
-            options={options}
-            selected={selectedM}
-            onChange={val => setSelectedM(val)}
-          />
-        </Disclosure>
-        <Disclosure filled width="max" summary="Компонент Кнопка">
-          <Flex gap=".5rem">
-            <Button>Основная</Button>
-            <Button theme="secondary">Второстепенная</Button>
-            <Button theme="normal">Нормальная</Button>
-            <Button theme="flat">Без фона</Button>
-            <Button theme="normal-flat">Без фона</Button>
-          </Flex>
-          <Flex gap=".5rem">
-            <Button size="xl">Большая - XL</Button>
-            <Button size="l">Стандартная - L</Button>
-            <Button size="m">Средняя - M</Button>
-            <Button size="s">Маленькая - S</Button>
-            <Button size="xs">Крошечная - XS</Button>
-            <Button size="l">
-              <Icon data={CopyOutline} />
-            </Button>
-          </Flex>
-        </Disclosure>
-        <Code code={codeBlock} />
-        <Disclosure summary="Компонент Текста">
-          <Col gap=".5rem">
-            {textVariants.map(variant => (
-              <Text key={variant} variant={variant}>
-                Текст варианта {variant}
-              </Text>
-            ))}
-          </Col>
-        </Disclosure>
-        <Disclosure summary="компонент Cards">
-          <Flex gap={16}>
-            <Card gap={16} style={{ width: '300px', backgroundColor: '#18a4ef10' }}>
-              <Text variant="subheading-1">Назавние карточки</Text>
-              <Text>Тело карточки</Text>
-              <Flex gap={8}>
-                <Button>В корзину</Button>
-                <Button theme="normal">Удалить</Button>
-              </Flex>
-            </Card>{' '}
-            <Card gap={16} style={{ width: '400px', backgroundColor: '#18a4ef10' }}>
-              <Text variant="subheading-1">Назавние карточки</Text>
-              <Text>Тело карточки</Text>
-              <Flex gap={8}>
-                <Button>В корзину</Button>
-                <Button theme="normal">Удалить</Button>
-              </Flex>
-            </Card>{' '}
-            <Card gap={16} style={{ width: '400px', backgroundColor: '#18a4ef10' }}>
-              <Text variant="subheading-1">Назавние карточки</Text>
-              <Text>Тело карточки</Text>
-              <Flex gap={8}>
-                <Button>В корзину</Button>
-                <Button theme="normal">Удалить</Button>
-              </Flex>
-            </Card>{' '}
-          </Flex>
-        </Disclosure>
-        <Input
-          type={'text'}
-          value={value}
-          onChange={e => {
-            setValue(e);
-          }}
-          placeholder={'Введите ваше имя'}
-          width="max"
-          helperText="Пишите имя на русском"
-        />
-        <Textarea
-          width="max"
-          value={longValue}
-          onChange={val => setLongValue(val)}
-          placeholder="Здесь будет много текста"
-          helperText="Здесь можно написать много строк"
-        ></Textarea>
-        <Checkbox
-          label="Включить плавающее меню"
-          checked={checked}
-          onChange={v => setChecked(v)}
-        ></Checkbox>
-        <Select
-          options={options}
-          placeholder="Выбери меня!"
-          selected={selected}
-          onChange={(option: Option | Option[]) => setSelected(option as Option)}
-          closeAfterSelect={true}
-          floatingOptions={checked}
-          width="max"
-        ></Select>
-        <Select
-          options={options}
-          placeholder="Выбери меня!"
-          selected={selectedM}
-          onChange={(options: Option | Option[]) => setSelectedM(options as Option[])}
-          floatingOptions={checked}
-          closeAfterSelect={false}
-          multiple
-          width="max"
-        ></Select>
-        {isLoading && <Loader withOverlay />}
-
-        {/* <Select placeholder="role">
-        <Select.Option>Привет!</Select.Option>
-      </Select> */}
-        <Flex gap={10}>
-          <Button onClick={() => setOpen(true)}>Открой окно</Button>
-          <Tooltip
-            hasArrow
-            position="right"
-            content={
-              <Flex direction="column">
-                <Text variant="heading-3">Важное сообщение!</Text>
-                <Text variant="body-1">Уже всё...</Text>
-                <Button theme="flat">Ознакомлен</Button>
-              </Flex>
-            }
+    <Slides>
+      <Slide duration={4} style={{ overflow: 'hidden' }} className={styles.enter}>
+        <div className={styles.floatingHint}>
+          Просто начни листать
+          <div className={styles.scrollBlock}>
+            <div className={styles.scroller}></div>
+          </div>
+        </div>
+        <Stars></Stars>
+        <Col gap={8} alignItems="center" justifyContent="center" style={{ height: '100%' }}>
+          <Transition
+            transitions={{
+              opacity: {
+                from: 0,
+                to: 1,
+                phase: {
+                  start: 0,
+                  stop: 0.3,
+                },
+              },
+            }}
           >
-            <Button
-              theme="secondary"
-              onClick={() => {
-                setIsLoading(true);
-                setTimeout(() => {
-                  setIsLoading(false);
-                }, 10000);
+            <Transition
+              transitions={{
+                gap: {
+                  from: 32,
+                  to: 0,
+                  phase: { start: 0.4, stop: 0.6 },
+                  pattern: '{}px',
+                },
               }}
             >
-              Text
-            </Button>
-          </Tooltip>
-        </Flex>
-        <Modal open={open} onClose={() => setOpen(false)}>
-          <Col gap={10} direction="column">
-            <Flex justifyContent="space-between" alignItems="center" style={{ width: '100%' }}>
-              <Text variant="heading-3">Заголовок модалки</Text>
-              <Button theme="flat" onClick={() => setOpen(false)}>
-                X
-              </Button>
+              <Flex alignItems="center">
+                <Transition
+                  transitions={{
+                    scale: { from: 1, to: 35, phase: { start: 0.8, stop: 0.9 } },
+                    translateX: {
+                      from: 0,
+                      to: 10,
+                      phase: { start: 0.8, stop: 0.9 },
+                      pattern: '{}px',
+                    },
+                    rotate: {
+                      from: 0,
+                      to: 90,
+                      phase: { start: 0.8, stop: 0.9 },
+                      pattern: '{}deg',
+                    },
+                  }}
+                >
+                  <svg
+                    width="308"
+                    height="308"
+                    viewBox="0 0 308 308"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    style={{ zIndex: 1 }}
+                  >
+                    <Transition
+                      transitions={{
+                        opacity: {
+                          from: 1,
+                          to: 0,
+                          phase: {
+                            start: 0.3,
+                            stop: 0.6,
+                          },
+                        },
+                      }}
+                    >
+                      <rect width="308" height="308" rx="76" fill="#2558CF" />
+                    </Transition>
+                    <Transition
+                      transitions={{
+                        x: {
+                          from: 154,
+                          to: 600,
+                          pattern: '{}px',
+                          phase: { start: 0.3, stop: 0.6 },
+                        },
+                      }}
+                    >
+                      <rect
+                        x="154"
+                        y="28.2965"
+                        width="178.191"
+                        height="178.191"
+                        rx="53"
+                        transform="rotate(45 154 28.2965)"
+                        fill="white"
+                      />
+                    </Transition>
+                    <Transition
+                      transitions={{ scale: { from: 1, to: 2, phase: { start: 0.4, stop: 0.6 } } }}
+                    >
+                      <path
+                        d="M153.023 111.855C153.371 109.594 156.629 109.594 156.977 111.855L162.148 145.489C162.28 146.346 162.949 147.02 163.805 147.159L196.846 152.526C199.085 152.89 199.085 156.11 196.846 156.474L163.805 161.841C162.949 161.98 162.28 162.654 162.148 163.511L156.977 197.145C156.629 199.406 153.371 199.406 153.023 197.145L147.852 163.511C147.72 162.654 147.051 161.98 146.195 161.841L113.154 156.474C110.915 156.11 110.915 152.89 113.154 152.526L146.195 147.159C147.051 147.02 147.72 146.346 147.852 145.489L153.023 111.855Z"
+                        fill="#2558CF"
+                        style={{ transformOrigin: 'center' }}
+                      />
+                    </Transition>
+                  </svg>
+                </Transition>
+                <Text variant="display-1" style={{ color: '#2558CF' }}>
+                  Gypsum
+                </Text>
+              </Flex>
+            </Transition>
+          </Transition>
+          <Transition
+            transitions={{
+              translateX: {
+                from: -50,
+                to: 0,
+                phase: {
+                  start: 0.6,
+                  stop: 0.8,
+                },
+                pattern: '{}px',
+              },
+              opacity: {
+                from: 0,
+                to: 1,
+                phase: { start: 0.6, stop: 0.7 },
+              },
+            }}
+          >
+            <Text
+              variant="body-1"
+              color="brand"
+              style={{
+                background: 'rgb(38 88 207 / 18%)',
+                padding: '0.2rem 1rem',
+                borderRadius: '.2rem',
+                fontSize: '2rem',
+                backdropFilter: 'blur(16px)',
+              }}
+            >
+              Прогрессивный UI Kit для ваших решений
+            </Text>
+          </Transition>
+          <Animation
+            animations={{
+              opacity: {
+                from: 0,
+                to: 1,
+                frame: 0.9,
+                duration: 500,
+              },
+              pointerEvents: {
+                from: 'none',
+                to: 'all',
+                frame: 0.9,
+              },
+              display: {
+                from: 'none',
+                to: 'flex',
+                frame: 0.5,
+              },
+            }}
+          >
+            <Flex
+              alignItems="center"
+              justifyContent="center"
+              style={{
+                height: '100%',
+                width: '100%',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                zIndex: 100,
+              }}
+            >
+              <Animation
+                animations={{
+                  background: { from: 'var(--gy-color-brand)', to: '#0d255d', frame: 0.8 },
+                }}
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                  }}
+                >
+                  <svg
+                    id="visual"
+                    viewBox="0 0 900 600"
+                    width="900"
+                    height="600"
+                    xmlns="http://www.w3.org/2000/svg"
+                    version="1.1"
+                    style={{ width: '100%', height: '100%', transform: 'scale(1.3)' }}
+                  >
+                    <defs>
+                      <linearGradient id="grad1_0" x1="33.3%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="20%" stop-color="#001220" stop-opacity="1"></stop>
+                        <stop offset="80%" stop-color="#001220" stop-opacity="1"></stop>
+                      </linearGradient>
+                    </defs>
+                    <defs>
+                      <linearGradient id="grad2_0" x1="0%" y1="0%" x2="66.7%" y2="100%">
+                        <stop offset="20%" stop-color="#001220" stop-opacity="1"></stop>
+                        <stop offset="80%" stop-color="#001220" stop-opacity="1"></stop>
+                      </linearGradient>
+                    </defs>
+                    <g transform="translate(900, 0)">
+                      <path
+                        className={styles.floatingL}
+                        d="M0 297.5C-39.1 294.1 -78.3 290.8 -113.8 274.8C-149.4 258.8 -181.3 230.1 -197.3 197.3C-213.2 164.5 -213.2 127.7 -227.3 94.1C-241.3 60.6 -269.4 30.3 -297.5 0L0 0Z"
+                        fill="#6a71f0"
+                      ></path>
+                    </g>
+                    <g transform="translate(0, 600)">
+                      <path
+                        className={styles.floating}
+                        d="M0 -297.5C28.6 -269.2 57.3 -241 95.7 -231C134.1 -220.9 182.2 -229 210.3 -210.3C238.5 -191.7 246.6 -146.3 257.8 -106.8C268.9 -67.3 283.2 -33.6 297.5 0L0 0Z"
+                        fill="#6a71f0"
+                      ></path>
+                    </g>
+                  </svg>
+                </div>
+              </Animation>
+              <Animation
+                animations={{
+                  opacity: {
+                    from: 0,
+                    to: 1,
+                    frame: 0.9,
+                    duration: 500,
+                  },
+                  translateX: {
+                    from: -30,
+                    to: 0,
+                    pattern: '{}px',
+                    frame: 0.9,
+                    duration: 500,
+                  },
+                }}
+              >
+                <Card
+                  gap={16}
+                  wrap="nowrap"
+                  style={{
+                    maxWidth: '600px',
+                    padding: '3rem',
+                    backgroundColor: '#fff',
+                    borderRadius: '2rem',
+                    zIndex: 1,
+                  }}
+                >
+                  <Text variant="heading-1" color="primary">
+                    Продолжаем знакомство?
+                  </Text>{' '}
+                  <Text variant="body-1" color="primary">
+                    Интересный факт, это презентация создана с помощью компонентов анимации
+                    GypsumUI. Эти анимации, как вы успели заметить, завязаны на скроле
+                    страницы.{' '}
+                  </Text>
+                  <Flex gap={8}>
+                    <Link to="#anchor">
+                      <Button size="l">
+                        <b>Продолжим</b> <Icon size={25} data={CaretRightOutline}></Icon>
+                      </Button>
+                    </Link>
+                    <Link to="/demo">
+                      <Button size="l" theme="secondary">
+                        <b>Сразу к демо</b>
+                      </Button>
+                    </Link>
+                  </Flex>
+                </Card>
+              </Animation>
             </Flex>
-            <Text>Main content</Text>
-            <Flex>
-              <Button>Привет!</Button>
-            </Flex>
-          </Col>
-        </Modal>
-        <Tooltip hasArrow content={<>Треш</>} position="right">
-          <Button theme="normal">Наведи на меня</Button>
-        </Tooltip>
-      </Flex>
-      <Button
-        style={{ margin: '0 auto', display: 'block' }}
-        onClick={() => {
-          setIsLoading(!isLoading);
-        }}
-      >
-        Переключить загрузку
-      </Button>
-    </>
+          </Animation>
+        </Col>
+      </Slide>
+      <Slide>
+        <Anchor id="anchor">Якорь</Anchor>
+      </Slide>
+    </Slides>
   );
 }
