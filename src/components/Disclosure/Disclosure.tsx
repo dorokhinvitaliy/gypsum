@@ -68,7 +68,7 @@ const Content = ({ children }: { children: React.ReactNode }) => {
     } else {
       setContentHeight(0);
     }
-  }, [opened]);
+  }, [opened, children]);
   if (opened === undefined) return 'Cannot use <Content> apart from <Disclosure>';
   return (
     <div className={styles.contentWrapper} ref={contentRef} style={{ height: contentHeight }}>
