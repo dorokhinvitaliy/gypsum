@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 
 type AnimationDef = {
-  from: number;
-  to: number;
+  from: number | string;
+  to: number | string;
   frame?: number; // момент старта (0..1)
   duration?: number; // ms
   rewindable?: boolean;
@@ -92,7 +92,7 @@ export function useAnimation(animations: Animations, phase: number) {
         // Возвращаем к начальному значению с анимацией
         const value = anim.from;
         if (['scale', 'translateX', 'translateY', 'rotate'].includes(prop)) {
-          const pattern = anim.pattern ?? `${prop}({})`;
+          const pattern = anim.pattern ? `${prop}(${anim.pattern})` : `${prop}({})`;
           transformValues[prop] = pattern.replace('{}', value.toString());
         } else {
           const pattern = anim.pattern ?? '{}';
@@ -114,7 +114,7 @@ export function useAnimation(animations: Animations, phase: number) {
         // Мгновенно возвращаем к начальному значению (без transition)
         const value = anim.from;
         if (['scale', 'translateX', 'translateY', 'rotate'].includes(prop)) {
-          const pattern = anim.pattern ?? `${prop}({})`;
+          const pattern = anim.pattern ? `${prop}(${anim.pattern})` : `${prop}({})`;
           transformValues[prop] = pattern.replace('{}', value.toString());
         } else {
           const pattern = anim.pattern ?? '{}';
@@ -126,7 +126,7 @@ export function useAnimation(animations: Animations, phase: number) {
       else if (!state.triggered) {
         const value = anim.from;
         if (['scale', 'translateX', 'translateY', 'rotate'].includes(prop)) {
-          const pattern = anim.pattern ?? `${prop}({})`;
+          const pattern = anim.pattern ? `${prop}(${anim.pattern})` : `${prop}({})`;
           transformValues[prop] = pattern.replace('{}', value.toString());
         } else {
           const pattern = anim.pattern ?? '{}';
@@ -138,7 +138,7 @@ export function useAnimation(animations: Animations, phase: number) {
       else if (state.triggered && !state.isAnimating) {
         const value = anim.to;
         if (['scale', 'translateX', 'translateY', 'rotate'].includes(prop)) {
-          const pattern = anim.pattern ?? `${prop}({})`;
+          const pattern = anim.pattern ? `${prop}(${anim.pattern})` : `${prop}({})`;
           transformValues[prop] = pattern.replace('{}', value.toString());
         } else {
           const pattern = anim.pattern ?? '{}';

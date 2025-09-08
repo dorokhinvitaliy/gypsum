@@ -8,8 +8,8 @@ export type TransitionDef = {
 export type Transitions = Record<string, TransitionDef>;
 
 type AnimationDef = {
-  from: number;
-  to: number;
+  from: number | string;
+  to: number | string;
   frame?: number; // 0..1
   duration?: number; // ms
   rewindable?: boolean;

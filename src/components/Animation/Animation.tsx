@@ -21,6 +21,7 @@ const Slide = ({
   className = '',
   visibleBounds = false,
   style,
+  ...props
 }: {
   children: React.ReactNode;
   duration?: number;
@@ -41,7 +42,12 @@ const Slide = ({
       className={styles.slideArea}
       style={{ height: `${duration * 100}vh` }}
     >
-      <div ref={slideRef} className={classNames(styles.slide, className)} style={{ ...style }}>
+      <div
+        ref={slideRef}
+        className={classNames(styles.slide, className)}
+        style={{ ...style }}
+        {...props}
+      >
         <SlideContext value={{ phase: phase }}>{children}</SlideContext>
       </div>
     </div>
