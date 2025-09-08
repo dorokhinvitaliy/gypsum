@@ -3,6 +3,25 @@
   background-color: rgba(21, 130, 185, 0.224);
   border-radius: 1rem;
   color: rgb(21, 130, 185);
-  width: calc(100% / 3);
+  width: auto;
   transition: all 0.3s ease;
+
+  &.card-theme- {
+    &normal {
+      background-color: rgba(165, 165, 165, 0.114);
+    }
+
+    &normal-branded {
+      background-color: color-mix(in srgb, var(--gy-color-brand), transparent 90%);
+    }
+
+    &filled {
+      --gy-text-color-primary: #fff;
+      background-color: var(--gy-color-brand);
+    }
+  }
+
+  &.outlined {
+    box-shadow: 0 0 0 3px inset rgba(78, 78, 78, 0.095);
+  }
 }
