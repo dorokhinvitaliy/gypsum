@@ -6,6 +6,7 @@ interface UseScrollArgs {
   slideRef: RefObject<HTMLElement | null>;
   setPhase: (phase: number) => void;
   useVisiblePhase?: boolean;
+  callback?: (arg0: number) => void;
 }
 
 export const useScroll = ({
@@ -13,6 +14,7 @@ export const useScroll = ({
   slideRef,
   setPhase,
   useVisiblePhase = false,
+  callback,
 }: UseScrollArgs) => {
   useEffect(() => {
     let ticking = false;
@@ -44,7 +46,7 @@ export const useScroll = ({
               const scrolled = -offsetTop;
               phaseCalc = Math.min(Math.max(scrolled / totalScrollable, 0), 1);
             }
-
+            callback?.(phaseCalc);
             setPhase(phaseCalc);
           }
 
@@ -59,5 +61,5 @@ export const useScroll = ({
     handleScroll(); // начальное вычисление
 
     return () => container.removeEventListener('scroll', handleScroll);
-  }, [containerRef, slideRef, setPhase, useVisiblePhase]);
+  }, [containerRef, slideRef, setPhase, useVisiblePhase, callback]);
 };

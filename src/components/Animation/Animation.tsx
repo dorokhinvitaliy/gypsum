@@ -21,19 +21,27 @@ const Slide = ({
   className = '',
   visibleBounds = false,
   style,
+  onSlideScroll,
   ...props
 }: {
   children: React.ReactNode;
   duration?: number;
   className?: string;
   visibleBounds?: boolean;
+  onSlideScroll?: (arg0: number) => void;
 } & HTMLAttributes<HTMLDivElement>) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const slideRef = useRef<HTMLDivElement>(null);
   const [phase, setPhase] = useState(0);
 
   if (duration === 1) visibleBounds = true;
-  useScroll({ containerRef, slideRef, setPhase, useVisiblePhase: visibleBounds });
+  useScroll({
+    containerRef,
+    slideRef,
+    setPhase,
+    useVisiblePhase: visibleBounds,
+    callback: onSlideScroll,
+  });
 
   return (
     <div
