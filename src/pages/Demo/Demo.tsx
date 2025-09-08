@@ -12,12 +12,10 @@ import {
 } from '@/components';
 import Flex, { Col } from '@/components/Flex/Flex';
 import { type Option } from '@/components/Input/Select.type';
-import { textVariants } from '@/components/Text/Text.types';
 
-import styles from './Demo.module.scss';
 import CaretRightOutline from '@/components/Icons/CaretRightOutline';
 import { useState } from 'react';
-import Anchor from '@/components/Navigation/Anchor';
+
 import { ScrollToId } from '@/components/Navigation/ScrollToId';
 import Article from '@/components/Article/Article';
 import TextDemo from './TextDemo';

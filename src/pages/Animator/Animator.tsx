@@ -1,5 +1,4 @@
-import { Button, Card, Flex, Text } from '@/components';
-import { Slide, Slides, Transition, Animation } from '@/components/Animation/Animation';
+import { Button, Card, Flex, Text, Slide, Slides, Transition, Animation } from '@/components';
 
 import { usePhase } from '@/components/Animation/usePhase';
 
