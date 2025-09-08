@@ -42,7 +42,9 @@ export default function Button({
         { [styles.loading]: loading },
         {
           [styles.iconOnly]:
-            React.isValidElement(children) && (children.type as any).displayName === 'Icon',
+            React.isValidElement(children) &&
+            ((children.type as { displayName?: string; name?: string }).displayName === 'Icon' ||
+              (children.type as { displayName?: string; name?: string }).name === 'Icon'),
         },
         { [styles.long]: width === 'max' },
         className,
