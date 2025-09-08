@@ -15,8 +15,11 @@ export { default as Layout } from './Layout/Layout';
 export { default as Helper } from './Helper/Helper';
 export { default as Article } from './Article/Article';
 
+export { Animation, Transition, Slide, Slides } from './Animation/Animation';
+
 export { default as Tooltip } from './Tooltip/Tooltip';
 export { default as Checkbox } from './Checkbox/Checkbox';
+export { default as CheckboxGroup } from './Checkbox/Checkbox';
 export { default as Disclosure } from './Disclosure/Disclosure';
 export { default as Icon } from './Icons/Icon/Icon';
 
