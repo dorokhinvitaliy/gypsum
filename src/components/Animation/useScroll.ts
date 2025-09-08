@@ -53,9 +53,11 @@ export const useScroll = ({
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    const container = document.querySelector('main') ?? window;
+
+    container.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll(); // начальное вычисление
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => container.removeEventListener('scroll', handleScroll);
   }, [containerRef, slideRef, setPhase, useVisiblePhase]);
 };
