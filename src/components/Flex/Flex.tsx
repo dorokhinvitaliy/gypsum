@@ -45,7 +45,7 @@ export default Flex;
 
 const Col = ({ children, ...props }: { children: React.ReactNode } & FlexProps) => {
   return (
-    <Flex direction="column" wrap="nowrap" {...props}>
+    <Flex wrap="nowrap" {...props} direction="column">
       {children}
     </Flex>
   );

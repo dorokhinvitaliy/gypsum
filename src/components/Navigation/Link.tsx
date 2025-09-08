@@ -4,6 +4,7 @@ import Helper from '../Helper/Helper';
 import classNames from 'classnames';
 
 import styles from './Navigation.module.scss';
+import { ScrollToId } from './ScrollToId';
 
 const Link = ({
   children,
@@ -25,6 +26,9 @@ const Link = ({
     e.preventDefault();
     if (onClick) {
       onClick?.(e);
+    }
+    if (to && to[0] === '#') {
+      ScrollToId(to.slice(1));
     }
     if (to) navigate(to);
   };
