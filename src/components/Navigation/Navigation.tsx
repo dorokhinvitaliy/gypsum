@@ -24,6 +24,7 @@ const Aside = ({
   hasToggleButton = true,
   collapsed = false,
   closeOnClickOutside = true,
+  dark,
   ...props
 }: {
   children: React.ReactNode;
@@ -31,6 +32,7 @@ const Aside = ({
   hasToggleButton?: boolean;
   collapsed?: boolean;
   closeOnClickOutside?: boolean;
+  dark?: boolean;
 } & FlexProps) => {
   const [opened, setOpened] = useState(collapsed);
   useEffect(() => {
@@ -46,7 +48,7 @@ const Aside = ({
         opened,
       }}
     >
-      <div className={styles.aside_container}>
+      <div className={classNames(styles.aside_container, { [styles.dark]: dark })}>
         <div ref={ref} className={classNames(styles.aside, { [styles.opened]: opened })}>
           <Col gap=".5rem" className={styles.links}>
             <Col gap=".5rem" {...props}>

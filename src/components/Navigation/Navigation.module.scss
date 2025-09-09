@@ -8,6 +8,7 @@
     background: #f0f0f0;
     transition: all 0.3s ease;
     height: 100vh;
+    z-index: 1;
 
     .divider {
       width: 100%;
@@ -42,6 +43,7 @@
       display: flex;
       padding: 0.7rem 0;
       gap: 0.5rem;
+      color: var(--gy-color-brand);
       border-radius: 0.5rem;
       background-color: transparent;
 
@@ -58,7 +60,7 @@
       padding: 0.7rem;
       border-radius: 0.5rem;
       background-color: transparent;
-
+      color: var(--gy-color-brand);
       transition: all 0.3s ease;
 
       &.arrowLink {
@@ -81,10 +83,10 @@
       }
 
       &:hover {
-        background-color: #a3a3a323;
+        background-color: color-mix(in srgb, var(--gy-color-brand), transparent 90%);
       }
       &.isActive {
-        background-color: #747bff;
+        background-color: var(--gy-color-brand);
         color: #fff;
       }
     }
@@ -116,4 +118,22 @@
       transform: translateX(0);
     }
   }
+}
+
+.dark {
+  .aside {
+    background-color: #061e52;
+
+    .asideLink {
+      color: color-mix(in srgb, var(--gy-color-brand), #ffffff);
+      &.isActive {
+        background-color: color-mix(in srgb, var(--gy-color-brand), #000);
+      }
+    }
+  }
+
+  /*   .main {
+    background-color: color-mix(in srgb, var(--gy-color-brand), #000);
+    --gy-text-color-primary: #fff;
+  } */
 }

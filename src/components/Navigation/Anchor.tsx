@@ -16,7 +16,7 @@ const Anchor = ({ children, id }: { children: React.ReactNode; id?: string }) =>
     }
   };
   return (
-    <Flex alignItems="center" className={styles.anchor}>
+    <Flex alignItems="center" className={styles.anchor} wrap="nowrap">
       <a
         ref={linkRef}
         id={id ?? undefined}
