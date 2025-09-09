@@ -4,6 +4,20 @@
   box-sizing: border-box;
 }
 
+.dark {
+  --gy-text-color-primary: #ffffff; /* основной текст */
+  --gy-text-color-secondary: #d0d0d0; /* менее важный текст */
+  --gy-text-color-tertiary: #6b7280; /* подсказки */
+  --gy-text-color-disabled: #9ca3af;
+}
+
+.light {
+  --gy-text-color-primary: #111827; /* основной текст */
+  --gy-text-color-secondary: #868d96; /* менее важный текст */
+  --gy-text-color-tertiary: #6b7280; /* подсказки */
+  --gy-text-color-disabled: #9ca3af;
+}
+
 :root {
   /* Брендовые цвета */
   --gy-color-brand: #2558cf;
