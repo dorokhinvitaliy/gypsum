@@ -8,6 +8,7 @@ export type TextVariant =
   | 'heading-3'
   | 'subheading-1'
   | 'subheading-2'
+  | 'body-0d5'
   | 'body-1'
   | 'body-2'
   | 'caption'
@@ -25,6 +26,7 @@ export const textVariants = [
   'heading-3',
   'subheading-1',
   'subheading-2',
+  'body-0d5',
   'body-1',
   'body-2',
   'caption',
