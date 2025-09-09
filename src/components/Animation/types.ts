@@ -16,6 +16,7 @@ type AnimationDef = {
   animationCount?: number | 'infinite';
   trigger?: 'in-viewport';
   pattern?: string; // например scale({}) или {}px
+  timingFunction?: string;
 };
 
 export type Animations = Record<string, AnimationDef>;

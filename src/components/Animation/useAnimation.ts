@@ -1,16 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-
-type AnimationDef = {
-  from: number | string;
-  to: number | string;
-  frame?: number; // момент старта (0..1)
-  duration?: number; // ms
-  rewindable?: boolean;
-  animationCount?: number | 'infinite';
-  pattern?: string;
-};
-
-type Animations = Record<string, AnimationDef>;
+import type { Animations } from './types';
 
 type AnimationState = {
   triggered: boolean;
@@ -41,10 +30,14 @@ export function useAnimation(animations: Animations, phase: number) {
       const state = animationStates.current[prop];
       const duration = anim.duration ?? 200;
 
+      console.log(anim.timingFunction);
+
+      const timingFunction = anim.timingFunction ?? 'ease';
+
       if (['scale', 'translateX', 'translateY', 'rotate'].includes(prop)) {
-        transitionProperties.push(`transform ${duration}ms ease`);
+        transitionProperties.push(`transform ${duration}ms ${timingFunction}`);
       } else {
-        transitionProperties.push(`${prop} ${duration}ms ease`);
+        transitionProperties.push(`${prop} ${duration}ms ${timingFunction}`);
       }
 
       // Логика запуска анимации вперед - срабатывает при достижении frame
