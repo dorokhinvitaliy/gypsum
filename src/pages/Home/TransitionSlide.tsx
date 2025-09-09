@@ -61,23 +61,23 @@ export default function TransitionSlide() {
       from: 0,
       to: 360,
       pattern: '{}deg',
-      phase: { start: keys[0], stop: keys[1] },
+      phase: { start: ${keys[0]}, stop: ${keys[1]} },
     },
     scale: {
       from: 1,
       to: 1.4,
-      phase: { start: keys[1], stop: keys[2] },
+      phase: { start: ${keys[1]}, stop: ${keys[2]} },
     },
     translateX: {
       from: 0,
       to: -80,
-      phase: { start: keys[2], stop: keys[3] },
+      phase: { start: ${keys[2]}, stop: ${keys[3]} },
       pattern: '{}px',
     },
     opacity: {
       from: 1,
       to: 0,
-      phase: { start: keys[3], stop: keys[4] },
+      phase: { start: ${keys[3]}, stop: ${keys[4]} },
     },
   }}
 >

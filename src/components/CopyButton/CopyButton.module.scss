@@ -1,0 +1,26 @@
+.copy {
+  .copyIcon {
+    height: 1.2em;
+    transition: all 0.3s ease;
+  }
+  .checkedIcon {
+    height: 0em;
+    transition: all 0.3s ease;
+  }
+  .copyText {
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .checkedText {
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  &.successed {
+    .copyIcon {
+      height: 0;
+    }
+    .checkedIcon {
+      height: 1.2em;
+    }
+  }
+}
