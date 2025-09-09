@@ -52,3 +52,18 @@ const Col = ({ children, ...props }: { children: React.ReactNode } & FlexProps) 
 };
 
 export { Col };
+
+const Centered = ({ children, ...props }: { children: React.ReactNode } & FlexProps) => {
+  return (
+    <Flex
+      alignItems="center"
+      justifyContent="center"
+      style={{ width: '100%', height: '100%' }}
+      {...props}
+    >
+      {children}
+    </Flex>
+  );
+};
+
+export { Centered };
