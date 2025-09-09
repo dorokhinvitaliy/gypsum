@@ -5,7 +5,7 @@ export { default as Select } from './Input/Select';
 export { default as Textarea } from './Input/Textarea';
 export { default as Text } from './Text/Text';
 export { default as Flex } from './Flex/Flex';
-export { Col } from './Flex/Flex';
+export { Col, Centered } from './Flex/Flex';
 export { default as Modal } from './Modal/Modal';
 export { default as Loader } from './Loader/Loader';
 export { default as Card } from './Card/Card';
