@@ -115,21 +115,19 @@ export type TextColor = 'primary' | 'secondary' | 'tertiary' | 'disabled' | 'inh
     { id: 3, text: 'Третий элемент списка' },
   ];
   return (
-    <Col gap={16} alignItems="center" style={{ maxWidth: '800px', margin: '0 auto' }}>
-      <Card gap={16} outlined theme="filled" brandColor="#747bff">
+    <Col gap={16} alignItems="center" style={{ maxWidth: '800px', margin: '1rem auto' }}>
+      <Card gap={16} outlined theme="filled">
         <Text variant="heading-2">Начнем без лишних слов</Text>
         <Text>
           На этой странице представлены практически все компоненты UI Kit Gypsum. Можешь быстро их
           посмотреть, а затем изучить каждый подробнее.
         </Text>
         <Flex gap={8}>
-          <Button theme="reverted" size="m" onClick={() => ScrollToId('TextBlock')}>
+          <Button theme="reverted" onClick={() => ScrollToId('TextBlock')}>
             Начать знакомство <Icon size={25} data={CaretRightOutline}></Icon>
           </Button>
           <Link to="/">
-            <Button theme="reverted-secondary" size="m">
-              На главную
-            </Button>
+            <Button theme="reverted-secondary">На главную</Button>
           </Link>
         </Flex>
       </Card>

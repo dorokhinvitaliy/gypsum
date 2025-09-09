@@ -1,306 +1,91 @@
-import {
-  Text,
-  Slides,
-  Slide,
-  Transition,
-  Animation,
-  Col,
-  Flex,
-  Button,
-  Card,
-  Icon,
-  Link,
-  Anchor,
-} from '@/components';
-import CaretRightOutline from '@/components/Icons/CaretRightOutline';
+import { Slides } from '@/components';
 
-import styles from './Home.module.scss';
-import Stars from './Stars';
+import AnimationSlide from './AnimationSlide';
+import GreetingSlide from './GreetingSlide';
+import TransitionSlide from './TransitionSlide';
 
 export default function Home() {
   return (
     <Slides>
-      <Slide duration={4} style={{ overflow: 'hidden' }} className={styles.enter}>
-        <div className={styles.floatingHint}>
-          Просто начни листать
-          <div className={styles.scrollBlock}>
-            <div className={styles.scroller}></div>
-          </div>
-        </div>
-        <Stars></Stars>
-        <Col gap={8} alignItems="center" justifyContent="center" style={{ height: '100%' }}>
-          <Transition
-            transitions={{
-              opacity: {
-                from: 0,
-                to: 1,
-                phase: {
-                  start: 0,
-                  stop: 0.3,
-                },
-              },
-            }}
-          >
-            <Transition
-              transitions={{
-                gap: {
-                  from: 32,
-                  to: 0,
-                  phase: { start: 0.4, stop: 0.6 },
-                  pattern: '{}px',
-                },
+      <GreetingSlide></GreetingSlide>
+      {/* <Slide style={{ background: 'rgb(13, 37, 93)', padding: '1rem' }}>
+        <Flex gap={16} style={{ maxWidth: '100%' }} wrap="nowrap">
+          <Col wrap="nowrap" gap={16} style={{ width: '120%' }}>
+            <Animation
+              animations={{
+                translateX: { from: -30, to: 0, pattern: '{}px', frame: 0.3 },
+                opacity: { from: 0, to: 1, frame: 0.3 },
               }}
             >
-              <Flex alignItems="center">
-                <Transition
-                  transitions={{
-                    scale: { from: 1, to: 35, phase: { start: 0.8, stop: 0.9 } },
-                    translateX: {
-                      from: 0,
-                      to: 10,
-                      phase: { start: 0.8, stop: 0.9 },
-                      pattern: '{}px',
-                    },
-                    rotate: {
-                      from: 0,
-                      to: 90,
-                      phase: { start: 0.8, stop: 0.9 },
-                      pattern: '{}deg',
-                    },
-                  }}
-                >
-                  <svg
-                    width="308"
-                    height="308"
-                    viewBox="0 0 308 308"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    style={{ zIndex: 1 }}
-                  >
-                    <Transition
-                      transitions={{
-                        opacity: {
-                          from: 1,
-                          to: 0,
-                          phase: {
-                            start: 0.3,
-                            stop: 0.6,
-                          },
-                        },
-                      }}
-                    >
-                      <rect width="308" height="308" rx="76" fill="#2558CF" />
-                    </Transition>
-                    <Transition
-                      transitions={{
-                        x: {
-                          from: 154,
-                          to: 600,
-                          pattern: '{}px',
-                          phase: { start: 0.3, stop: 0.6 },
-                        },
-                      }}
-                    >
-                      <rect
-                        x="154"
-                        y="28.2965"
-                        width="178.191"
-                        height="178.191"
-                        rx="53"
-                        transform="rotate(45 154 28.2965)"
-                        fill="white"
-                      />
-                    </Transition>
-                    <Transition
-                      transitions={{ scale: { from: 1, to: 2, phase: { start: 0.4, stop: 0.6 } } }}
-                    >
-                      <path
-                        d="M153.023 111.855C153.371 109.594 156.629 109.594 156.977 111.855L162.148 145.489C162.28 146.346 162.949 147.02 163.805 147.159L196.846 152.526C199.085 152.89 199.085 156.11 196.846 156.474L163.805 161.841C162.949 161.98 162.28 162.654 162.148 163.511L156.977 197.145C156.629 199.406 153.371 199.406 153.023 197.145L147.852 163.511C147.72 162.654 147.051 161.98 146.195 161.841L113.154 156.474C110.915 156.11 110.915 152.89 113.154 152.526L146.195 147.159C147.051 147.02 147.72 146.346 147.852 145.489L153.023 111.855Z"
-                        fill="#2558CF"
-                        style={{ transformOrigin: 'center' }}
-                      />
-                    </Transition>
-                  </svg>
-                </Transition>
-                <Text variant="display-1" style={{ color: '#2558CF' }}>
-                  Gypsum
+              <Card theme="white" size="xl">
+                <Anchor id="aside">Aside</Anchor>
+                <Text variant="body-0d5">
+                  Тсс, пока выключим свет и разберем первые UI - элементы, которые нам попались.
                 </Text>
-              </Flex>
-            </Transition>
-          </Transition>
-          <Transition
-            transitions={{
-              translateX: {
-                from: -50,
-                to: 0,
-                phase: {
-                  start: 0.6,
-                  stop: 0.8,
+                <Text variant="body-0d5">
+                  Слева ты видишь <code>Aside</code> меню. Очень удобная штука для проекта.
+                </Text>
+              </Card>
+            </Animation>
+            <Animation
+              animations={{
+                translateX: { from: -30, to: 0, pattern: '{}px', frame: 0.4 },
+                opacity: { from: 0, to: 1, frame: 0.4 },
+              }}
+            >
+              <Card theme="filled" size="xl">
+                <Anchor id="anchor">Якорь</Anchor>
+                <Text variant="body-0d5">
+                  Якорь - это удобная ссылка, обозначающая заголовок, к которому можно вернуться. Ты
+                  можешь навести курсор на заголовок данной карточки и проверить, как это работает.
+                </Text>
+                <Text variant="body-0d5">
+                  Слева ты видишь <code>Aside</code> меню. Очень удобная штука для проекта.
+                </Text>
+              </Card>
+            </Animation>
+          </Col>
+          <Col wrap="nowrap" gap={16} style={{ width: '100%' }}>
+            <Animation
+              animations={{
+                translateX: {
+                  from: -30,
+                  to: 0,
+                  pattern: '{}px',
+                  frame: 0.4,
+                  timingFunction: 'ease-in-out',
                 },
-                pattern: '{}px',
-              },
-              opacity: {
-                from: 0,
-                to: 1,
-                phase: { start: 0.6, stop: 0.7 },
-              },
-            }}
-          >
-            <Text
-              variant="body-1"
-              color="brand"
-              style={{
-                background: 'rgb(38 88 207 / 18%)',
-                padding: '0.2rem 1rem',
-                borderRadius: '.2rem',
-                fontSize: '2rem',
-                backdropFilter: 'blur(16px)',
+                opacity: { from: 0, to: 1, frame: 0.4 },
               }}
             >
-              Прогрессивный UI Kit для ваших решений
-            </Text>
-          </Transition>
-          <Animation
-            animations={{
-              opacity: {
-                from: 0,
-                to: 1,
-                frame: 0.9,
-                duration: 500,
-              },
-              pointerEvents: {
-                from: 'none',
-                to: 'all',
-                frame: 0.9,
-              },
-              display: {
-                from: 'none',
-                to: 'flex',
-                frame: 0.5,
-              },
-            }}
-          >
-            <Flex
-              alignItems="center"
-              justifyContent="center"
-              style={{
-                height: '100%',
-                width: '100%',
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                zIndex: 100,
+              <Card theme="white" size="xl">
+                <Anchor id="aside">Animation</Anchor>
+                <Text variant="body-0d5">
+                  Эта штука делает красивые css-анимации, в зависимотси от скролла страницы.
+                </Text>
+              </Card>
+            </Animation>
+            <Animation
+              animations={{
+                translateX: { from: -30, to: 0, pattern: '{}px', frame: 0.4 },
+                opacity: { from: 0, to: 1, frame: 0.4 },
               }}
             >
-              <Animation
-                animations={{
-                  background: { from: 'var(--gy-color-brand)', to: '#0d255d', frame: 0.8 },
-                }}
-              >
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                  }}
-                >
-                  <svg
-                    id="visual"
-                    viewBox="0 0 900 600"
-                    width="900"
-                    height="600"
-                    xmlns="http://www.w3.org/2000/svg"
-                    version="1.1"
-                    style={{ width: '100%', height: '100%', transform: 'scale(1.3)' }}
-                  >
-                    <defs>
-                      <linearGradient id="grad1_0" x1="33.3%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="20%" stop-color="#001220" stop-opacity="1"></stop>
-                        <stop offset="80%" stop-color="#001220" stop-opacity="1"></stop>
-                      </linearGradient>
-                    </defs>
-                    <defs>
-                      <linearGradient id="grad2_0" x1="0%" y1="0%" x2="66.7%" y2="100%">
-                        <stop offset="20%" stop-color="#001220" stop-opacity="1"></stop>
-                        <stop offset="80%" stop-color="#001220" stop-opacity="1"></stop>
-                      </linearGradient>
-                    </defs>
-                    <g transform="translate(900, 0)">
-                      <path
-                        className={styles.floatingL}
-                        d="M0 297.5C-39.1 294.1 -78.3 290.8 -113.8 274.8C-149.4 258.8 -181.3 230.1 -197.3 197.3C-213.2 164.5 -213.2 127.7 -227.3 94.1C-241.3 60.6 -269.4 30.3 -297.5 0L0 0Z"
-                        fill="#6a71f0"
-                      ></path>
-                    </g>
-                    <g transform="translate(0, 600)">
-                      <path
-                        className={styles.floating}
-                        d="M0 -297.5C28.6 -269.2 57.3 -241 95.7 -231C134.1 -220.9 182.2 -229 210.3 -210.3C238.5 -191.7 246.6 -146.3 257.8 -106.8C268.9 -67.3 283.2 -33.6 297.5 0L0 0Z"
-                        fill="#6a71f0"
-                      ></path>
-                    </g>
-                  </svg>
-                </div>
-              </Animation>
-              <Animation
-                animations={{
-                  opacity: {
-                    from: 0,
-                    to: 1,
-                    frame: 0.9,
-                    duration: 500,
-                  },
-                  translateX: {
-                    from: -30,
-                    to: 0,
-                    pattern: '{}px',
-                    frame: 0.9,
-                    duration: 500,
-                  },
-                }}
-              >
-                <Card
-                  gap={16}
-                  wrap="nowrap"
-                  style={{
-                    maxWidth: '600px',
-                    padding: '3rem',
-                    backgroundColor: '#fff',
-                    borderRadius: '2rem',
-                    zIndex: 1,
-                  }}
-                >
-                  <Text variant="heading-1" color="primary">
-                    Продолжаем знакомство?
-                  </Text>{' '}
-                  <Text variant="body-1" color="primary">
-                    Интересный факт, это презентация создана с помощью компонентов анимации
-                    GypsumUI. Эти анимации, как вы успели заметить, завязаны на скроле
-                    страницы.{' '}
-                  </Text>
-                  <Flex gap={8}>
-                    <Link to="#anchor">
-                      <Button size="l">
-                        <b>Продолжим</b> <Icon size={25} data={CaretRightOutline}></Icon>
-                      </Button>
-                    </Link>
-                    <Link to="/demo">
-                      <Button size="l" theme="secondary">
-                        <b>Сразу к демо</b>
-                      </Button>
-                    </Link>
-                  </Flex>
-                </Card>
-              </Animation>
-            </Flex>
-          </Animation>
-        </Col>
-      </Slide>
-      <Slide>
-        <Anchor id="anchor">Якорь</Anchor>
-      </Slide>
+              <Card theme="filled" size="xl" brandColor="#9009eaff">
+                <Anchor id="anchor">Якорь</Anchor>
+                <Text variant="body-0d5">
+                  Тсс, пока выключим свет и разберем первые UI - элементы, которые нам попались.
+                </Text>
+                <Text variant="body-0d5">
+                  Слева ты видишь <code>Aside</code> меню. Очень удобная штука для проекта.
+                </Text>
+              </Card>
+            </Animation>
+          </Col>
+        </Flex>
+      </Slide> */}
+      <AnimationSlide></AnimationSlide>
+      <TransitionSlide></TransitionSlide>
     </Slides>
   );
 }
