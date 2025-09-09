@@ -15,14 +15,16 @@ const Card = ({
   outlined,
   style,
   brandColor,
+  size = 'l',
   ...rest
 }: {
   children: React.ReactNode;
   className?: string;
-  theme?: 'normal' | 'normal-branded' | 'filled';
+  theme?: 'normal' | 'normal-branded' | 'filled' | 'white';
   outlined?: boolean;
   style?: CSSProperties;
   brandColor?: string;
+  size?: 's' | 'm' | 'l' | 'xl';
 } & HTMLAttributes<HTMLElement> &
   FlexProps) => {
   return (
@@ -30,7 +32,8 @@ const Card = ({
       className={classNames(
         styles.card,
         styles['card-theme-' + theme],
-        { [styles.outlined]: outlined },
+        styles['card-size-' + size],
+        { [styles.outlined]: outlined, light: theme === 'white' },
         className,
       )}
       style={{ '--gy-color-brand': brandColor, ...style } as CSSWithVars}
