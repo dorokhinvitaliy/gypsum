@@ -28,7 +28,7 @@ const Code = ({
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <div className={styles.codeBlock_wrapper} style={{ ...style, ...styleAttr }}>
           <div className={styles.header}>
-            <Text>{lang}</Text>
+            <Text>{lang ?? 'tsx'}</Text>
             <CopyButton size="s" theme="normal-flat" copyText={code} children={undefined} />
           </div>
           <pre className={classNames(className, styles.codeBlock)}>

@@ -49,7 +49,7 @@ export default function CopyButton({
       <Flex gap={4} alignItems="center">
         <Col>
           <Icon data={CopyOutline} className={styles.copyIcon} />
-          <Icon data={Checked} stroke-width={2} className={styles.checkedIcon} />
+          <Icon data={Checked} strokeWidth={2} className={styles.checkedIcon} />
         </Col>{' '}
         <Col>
           <div

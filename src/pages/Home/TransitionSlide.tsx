@@ -38,7 +38,7 @@ export default function TransitionSlide() {
     return list1.filter(e => !s.has(e));
   };
 
-  const keys = [0.1, 0.3, 0.5, 0.7, 0.9];
+  const keys = [0, 0.3, 0.5, 0.7, 0.9];
 
   const lines = [range(2, 7), range(8, 12), range(13, 18), range(19, 23)];
   const allLines = range(2, 23);
@@ -187,7 +187,7 @@ export default function TransitionSlide() {
                     className={styles.fire}
                     style={{ top: '60%', left: '60%', transform: 'none', width: 120, height: 120 }}
                   ></div>
-                  <Anchor id="scroll">Переходы </Anchor>
+                  <Anchor id="transition">Переходы </Anchor>
                   <Text variant="body-1">
                     Transition позволяют делать красивые анимации, завязанные на скролле страницы.
                   </Text>
