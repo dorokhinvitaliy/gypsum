@@ -3,6 +3,8 @@ import { Slides } from '@/components';
 import AnimationSlide from './AnimationSlide';
 import GreetingSlide from './GreetingSlide';
 import TransitionSlide from './TransitionSlide';
+import MainComponents from './MainComponents';
+import OverviewSlide from './OverviewSlide';
 
 export default function Home() {
   return (
@@ -86,6 +88,8 @@ export default function Home() {
       </Slide> */}
       <AnimationSlide></AnimationSlide>
       <TransitionSlide></TransitionSlide>
+      <OverviewSlide></OverviewSlide>
+      <MainComponents></MainComponents>
     </Slides>
   );
 }

@@ -17,15 +17,17 @@ import styles from './Home.module.scss';
 import asideStyles from '@/components/Navigation/Navigation.module.scss';
 
 export default function GreetingSlide() {
-  const checkScroll = (phase: number) => {
-    if (phase >= 0.9) {
-      document.querySelector(`.${asideStyles.aside_container}`)?.classList.add(asideStyles.dark);
-    } else {
-      document.querySelector(`.${asideStyles.aside_container}`)?.classList.remove(asideStyles.dark);
+  const checkScroll = (phase: number, isActive: boolean | undefined) => {
+    if (isActive) {
+      if (phase >= 0.9) {
+        document.querySelector(`.${asideStyles.aside}`)?.classList.add('dark');
+      } else {
+        document.querySelector(`.${asideStyles.aside}`)?.classList.remove('dark');
+      }
     }
   };
   return (
-    <Slide duration={5} className={styles.enter} onSlideScroll={pr => checkScroll(pr)}>
+    <Slide duration={5} className={styles.enter} onSlideScroll={(pr, act) => checkScroll(pr, act)}>
       <div className={styles.floatingHint}>
         Просто начни листать
         <div className={styles.scrollBlock}>

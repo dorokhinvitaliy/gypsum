@@ -15,7 +15,6 @@ import { themes } from 'prism-react-renderer';
 import { useState } from 'react';
 
 import styles from './Home.module.scss';
-import classNames from 'classnames';
 
 export default function TransitionSlide() {
   const Phase = () => {
@@ -94,7 +93,7 @@ export default function TransitionSlide() {
       className="dark"
       onSlideScroll={codeAnimationController}
     >
-      <Animation
+      {/*       <Animation
         animations={{
           display: {
             from: 'none',
@@ -109,7 +108,7 @@ export default function TransitionSlide() {
             <div className={styles.scroller}></div>
           </div>
         </div>
-      </Animation>
+      </Animation> */}
       <Centered>
         <Flex
           gap={8}
