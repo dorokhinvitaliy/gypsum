@@ -5,6 +5,7 @@ import GreetingSlide from './GreetingSlide';
 import TransitionSlide from './TransitionSlide';
 import MainComponents from './MainComponents';
 import OverviewSlide from './OverviewSlide';
+import Footer from '@/components/Footer/Footer';
 
 export default function Home() {
   return (
@@ -90,6 +91,7 @@ export default function Home() {
       <TransitionSlide></TransitionSlide>
       <OverviewSlide></OverviewSlide>
       <MainComponents></MainComponents>
+      <Footer></Footer>
     </Slides>
   );
 }
