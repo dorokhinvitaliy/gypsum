@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { type HTMLAttributes } from 'react';
 import styles from './Button.module.scss';
 
 type ButtonTheme =
@@ -20,7 +20,7 @@ export type ButtonProps = {
   disabled?: boolean;
   loading?: boolean;
   className?: string;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+} & HTMLAttributes<HTMLButtonElement>;
 
 export default function Button({
   children,

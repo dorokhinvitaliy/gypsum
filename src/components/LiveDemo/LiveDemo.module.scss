@@ -1,0 +1,54 @@
+.container {
+  border: 2px solid #d8d8d882;
+  border-radius: 1rem;
+  width: 100%;
+
+  &.floatingProps {
+    position: relative;
+    overflow: hidden;
+    .optionsMenuWrapper {
+      position: absolute;
+      z-index: 2;
+      backdrop-filter: blur(6px);
+      height: 100%;
+    }
+  }
+
+  .liveArea {
+    padding: 1rem;
+    position: relative;
+    transition: all 0.3s ease;
+
+    .floating {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 2;
+      &.hidden {
+        opacity: 0;
+        pointer-events: none;
+        user-select: none;
+      }
+    }
+  }
+
+  .optionsMenuWrapper {
+    overflow: hidden;
+    background-color: #f0f0f05e;
+    transition: all 0.3s ease;
+    .optionsMenu {
+      min-width: 300px;
+      padding: 1rem;
+    }
+  }
+}
+.simpleInput {
+  outline: none !important;
+  background-color: transparent;
+  color: var(--gy-text-color-primary);
+  border-bottom: 1px solid rgb(182, 182, 182);
+  transition: all 0.3s ease;
+  &:focus {
+    border-bottom: 1px solid var(--gy-color-brand);
+  }
+}

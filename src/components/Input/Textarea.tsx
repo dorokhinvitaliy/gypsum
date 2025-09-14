@@ -10,12 +10,16 @@ export default function Textarea({
   placeholder = 'Поле ввода',
   helperText,
   width = 'auto',
+  disabled,
+  invalid,
 }: {
   value: string;
   onChange: (arg0: string) => void;
   placeholder: string;
   helperText?: string;
   width?: 'max' | 'auto';
+  disabled?: boolean;
+  invalid?: boolean;
 }) {
   const [focused, updateFocused] = useState(false);
   const [empty, updateEmpty] = useState(value == '');
@@ -45,6 +49,8 @@ export default function Textarea({
       className={classNames(styles.inputBox_container, {
         [styles.tipActive]: helperText && focused,
         [styles.maxContainer]: width === 'max',
+        [styles.disabled]: disabled,
+        [styles.invalid]: invalid,
       })}
     >
       <div

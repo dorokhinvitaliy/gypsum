@@ -1,4 +1,4 @@
-import { useContext, useRef, useState, type HTMLAttributes } from 'react';
+import { useContext, useRef, type HTMLAttributes } from 'react';
 
 import styles from './Animation.module.scss';
 import React from 'react';
@@ -28,17 +28,16 @@ const Slide = ({
   duration?: number;
   className?: string;
   visibleBounds?: boolean;
-  onSlideScroll?: (arg0: number) => void;
+  onSlideScroll?: (phase: number, isActive?: boolean) => void;
 } & HTMLAttributes<HTMLDivElement>) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const slideRef = useRef<HTMLDivElement>(null);
-  const [phase, setPhase] = useState(0);
+  /*   const [phase, setPhase] = useState(0); */
 
   if (duration === 1) visibleBounds = true;
-  useScroll({
+  const { phase, isActive } = useScroll({
     containerRef,
     slideRef,
-    setPhase,
     useVisiblePhase: visibleBounds,
     callback: onSlideScroll,
   });
@@ -47,6 +46,7 @@ const Slide = ({
     <div
       ref={containerRef}
       data-phase={phase}
+      data-is-active={isActive}
       className={styles.slideArea}
       style={{ height: `${duration * 100}vh` }}
     >

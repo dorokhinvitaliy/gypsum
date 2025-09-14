@@ -3,6 +3,45 @@
 
 .inputBox_container,
 .selectBox_container {
+  &.invalid {
+    .inputBox {
+      background-color: color-mix(in srgb, $gy-color-field, rgb(147, 0, 0) 15%);
+      &:not(.active) {
+        &:hover {
+          background-color: color-mix(in srgb, $gy-color-field-hover, rgb(147, 0, 0) 10%);
+        }
+      }
+      &.active {
+        box-shadow: inset 0 0 0px 2px rgb(147, 0, 0);
+        background-color: color-mix(in srgb, $gy-color-bg, rgb(147, 0, 0) 10%);
+      }
+      .inputBoxLabel {
+        span {
+          color: color-mix(in srgb, var(--gy-color-danger), transparent);
+        }
+      }
+    }
+  }
+
+  &.disabled {
+    .inputBox {
+      pointer-events: none;
+      user-select: none;
+
+      background-color: var(--gy-color-field-disabled);
+      &:not(.active) {
+        &:hover {
+          background-color: var(--gy-color-field-disabled);
+        }
+      }
+
+      .inputBoxLabel {
+        span {
+          color: var(--gy-text-color-secondary);
+        }
+      }
+    }
+  }
   .inputBox_tip {
     overflow: hidden;
     height: 0;
@@ -26,10 +65,14 @@
     transition: all 0.3s ease;
   }
   &.tipActive {
+    &.invalid {
+      background-color: color-mix(in srgb, $gy-color-bg, rgb(147, 0, 0) 10%);
+    }
     background: #80808024;
     border-radius: 1rem;
   }
   min-width: 300px;
+  transition: all 0.3s ease;
   &.maxContainer {
     width: 100%;
   }
@@ -56,7 +99,7 @@
 
     &:not(.active) {
       &:hover {
-        background-color: #d9d9d994;
+        background-color: var(--gy-color-field-hover);
       }
     }
 
@@ -67,6 +110,15 @@
         font-size: 0.7rem;
         color: $gy-text-color-secondary;
         transition: all 0.3s ease;
+      }
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: -1;
       }
     }
 

@@ -30,8 +30,6 @@ export function useAnimation(animations: Animations, phase: number) {
       const state = animationStates.current[prop];
       const duration = anim.duration ?? 200;
 
-      console.log(anim.timingFunction);
-
       const timingFunction = anim.timingFunction ?? 'ease';
 
       if (['scale', 'translateX', 'translateY', 'rotate'].includes(prop)) {

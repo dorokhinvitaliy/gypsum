@@ -1,6 +1,6 @@
 import styles from './Checkbox.module.scss';
 import classNames from 'classnames';
-import type { SVGProps } from 'react';
+import type { HTMLAttributes, SVGProps } from 'react';
 import Flex from '../Flex/Flex';
 import type { Option } from '../Input/Select.type';
 
@@ -9,7 +9,7 @@ type CheckboxProps = {
   checked?: boolean;
   filled?: boolean;
   onChange?: (checked: boolean) => void;
-};
+} & Omit<HTMLAttributes<HTMLElement>, 'onChange'>;
 
 export function CheckIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -30,14 +30,19 @@ export default function Checkbox({
   label,
   checked = false,
   filled = false,
+  className,
   onChange,
+  ...props
 }: CheckboxProps) {
   const toggle = () => {
     onChange?.(!checked);
   };
 
   return (
-    <label className={classNames(styles['checkbox-container'], { [styles.filled]: filled })}>
+    <label
+      className={classNames(styles['checkbox-container'], { [styles.filled]: filled }, className)}
+      {...props}
+    >
       <div className={classNames(styles.checkbox, { [styles.checked]: checked })}>
         <div className={styles['checkbox-icon']}>
           <CheckIcon />

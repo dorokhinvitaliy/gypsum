@@ -48,7 +48,7 @@ const Aside = ({
         opened,
       }}
     >
-      <div className={classNames(styles.aside_container, { [styles.dark]: dark })}>
+      <div className={classNames(styles.aside_container, { dark: dark })}>
         <div ref={ref} className={classNames(styles.aside, { [styles.opened]: opened })}>
           <Col gap=".5rem" className={styles.links}>
             <Col gap=".5rem" {...props}>

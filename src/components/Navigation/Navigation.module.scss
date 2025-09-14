@@ -120,8 +120,8 @@
   }
 }
 
-.dark {
-  .aside {
+:global(.dark) {
+  &.aside {
     background-color: #061e52;
 
     .asideLink {
