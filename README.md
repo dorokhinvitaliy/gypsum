@@ -4,6 +4,8 @@
 
 Gypsum — это легкий UI Kit на TypeScript для React, ориентированный на простоту интеграции, понятную типизацию и приятный внешний вид из коробки. Библиотека включает базовые элементы (кнопки, текст, поля ввода), навигацию (aside-меню), вспомогательные виджеты (Tooltip, Modal, Loader) и модуль анимаций для скролл-зависимых эффектов.
 
+![Изображение](./public/MainComponents.png 'Основные компоненты')
+
 ### Возможности
 
 - Компоненты с аккуратной типизацией и предсказуемым API
@@ -73,7 +75,7 @@ type TextVariant =
   | 'hint-2';
 ```
 
-- `color?: TextColor` — цвет: `'primary' | 'secondary' | 'tertiary' | 'disabled' | 'inherit'`.
+- `color?: TextColor` — цвет: `'primary' | 'brand' | 'secondary' | 'tertiary' | 'disabled' | 'inherit'`.
 
 Пример:
 
@@ -111,7 +113,7 @@ import { HomeSolid } from '@/components/Icons';
 </Button>
 ```
 
-### Flex и Col
+### Flex, Col, Centered
 
 Удобные контейнеры для верстки на Flexbox.
 
@@ -156,7 +158,7 @@ import { Card } from '@/components';
 
 Пропсы:
 
-- `type: string`, `value: string`, `onChange: (value: string) => void`
+- `type: string`, `value: string`, `valid: boolean`, `disabled: boolean`, `onChange: (value: string) => void`
 - `placeholder: string`, `helperText?: string`, `width?: 'max' | 'auto'`
 
 Пример:
@@ -339,12 +341,12 @@ import { Article } from '@/components';
 
 Подсветка кода с кнопкой копирования (декоративно).
 
-Пропсы: `code: string`, `lang?: string`.
+Пропсы: `code: string`, `lang?: string`, `theme?: Theme`.
 
 ```tsx
 import { Code } from '@/components';
 
-<Code code={`console.log('Hello')`} lang="ts" />;
+<Code code={`console.log('Hello')`} lang="ts" theme={...} />;
 ```
 
 ### Disclosure
@@ -391,7 +393,7 @@ import { HomeSolid } from '@/components/Icons';
 import { Slides, Slide, Transition } from '@/components';
 
 <Slides>
-  <Slide duration={2}>
+  <Slide duration={2} onSlideScroll={(phase, isActive) => console.log(phase, isActive)}>
     <Transition
       transitions={{
         opacity: { from: 0, to: 1, phase: { start: 0, stop: 1 } },
@@ -414,7 +416,8 @@ import { Slides, Slide, Animation } from '@/components';
     <Animation
       animations={{
         opacity: { from: 0, to: 1, frame: 0.1, duration: 300 },
-        scale: { from: 0.9, to: 1, frame: 0.1, duration: 300, pattern: 'scale({})' },
+        translateX: { from: 0, to: 100, frame: 0.3, duration: 200, pattern: '{}px' },
+        scale: { from: 0, to: 1, frame: 0.2, duration: 200, timingFunction: 'ease-in-out' },
       }}
     >
       <div>Анимируемый блок</div>
