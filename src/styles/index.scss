@@ -27,6 +27,7 @@
   --gy-color-brand-transparent: #2558cf1e;
   --gy-color-brand-active: #193d91;
   --gy-color-brand-subtle: #e7edfb;
+  --gy-color-danger: rgb(147, 0, 0);
 
   --gy-color-normal: #d1d5db5f;
   --gy-color-normal-hover: #d1d5db;
@@ -42,8 +43,8 @@
 
   /* Цвета полей ввода */
   --gy-color-field: #d9d9d966; /* основной текст */
-  --gy-color-field-hover: #b3b3b33a; /* менее важный текст */
-  --gy-color-field-disabled: #b3b3b33a;
+  --gy-color-field-hover: #b3b3b354; /* менее важный текст */
+  --gy-color-field-disabled: #8484846d;
 
   /* Текстовые цвета */
   --gy-text-color-primary: #111827; /* основной текст */
