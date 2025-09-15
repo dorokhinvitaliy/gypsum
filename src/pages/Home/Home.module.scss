@@ -21,7 +21,7 @@
   animation-fill-mode: both;
 
   &.dark {
-    background-color: rgb(33, 33, 33);
+    background-color: rgba(15, 15, 32, 0.47) !important;
     border: none;
     bottom: 1rem;
     color: #a7c2ff;
@@ -194,6 +194,14 @@
     transform: translate(-50%, -50%);
     border-radius: 50%;
     filter: blur(72px);
-    background: radial-gradient(#fcdab8, #f3829f, #ce7e92);
+    /*  background: radial-gradient(#fcdab8, #f3829f, #ce7e92); */
+    background: radial-gradient(#a8a6ff, #193d91);
   }
 }
+
+/* .magicCard {
+  transition: all 0.3s ease;
+  &:hover {
+    transform: translateX(10px);
+  }
+} */

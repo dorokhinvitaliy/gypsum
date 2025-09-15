@@ -15,6 +15,7 @@ const Card = ({
   outlined,
   style,
   brandColor,
+  fill,
   size = 'l',
   ...rest
 }: {
@@ -24,6 +25,7 @@ const Card = ({
   outlined?: boolean;
   style?: CSSProperties;
   brandColor?: string;
+  fill?: CSSProperties['background'];
   size?: 's' | 'm' | 'l' | 'xl';
 } & HTMLAttributes<HTMLElement> &
   FlexProps) => {
@@ -36,7 +38,7 @@ const Card = ({
         { [styles.outlined]: outlined, light: theme === 'white' },
         className,
       )}
-      style={{ '--gy-color-brand': brandColor, ...style } as CSSWithVars}
+      style={{ '--gy-color-brand': brandColor, background: fill, ...style } as CSSWithVars}
       {...rest}
     >
       {children}

@@ -1,3 +1,5 @@
+import type { CSSProperties } from 'react';
+
 export type TextVariant =
   | 'display-1'
   | 'display-2'
@@ -43,6 +45,16 @@ export type TextColor =
   | 'inherit'
   | 'primary-reverted'
   | 'secondary-reverted'
-  | 'brand';
+  | 'brand'
+  | CSSProperties['color'];
 
-export const textColors = ['primary', 'secondary', 'tertiary', 'disabled', 'inherit'] as const;
+export const textColors = [
+  'primary',
+  'secondary',
+  'tertiary',
+  'disabled',
+  'inherit',
+  'primary-reverted',
+  'secondary-reverted',
+  'brand',
+] as const;

@@ -68,9 +68,9 @@ export default function AnimationSlide() {
         frame: ${keys[2]},
         duration: 1000,
       },
-      translateX: {
+      offsetDistance: {
         from: 0,
-        to: 250,
+        to: 100,
         frame: ${keys[3]},
         pattern: '{}%',
       },
@@ -145,15 +145,26 @@ export default function AnimationSlide() {
                   to: 1.5,
                   frame: keys[2],
                 },
-                translateX: {
+                ['offset-distance']: {
                   from: 0,
-                  to: 250,
+                  to: 100,
                   frame: keys[3],
                   pattern: '{}%',
+                  duration: 1000,
+                  timingFunction: 'ease-in-out',
                 },
               }}
             >
-              <img src="/rocket.svg" width={250} height={250} alt="" />
+              <img
+                src="/prettyRocket.svg"
+                width={300}
+                height={300}
+                alt=""
+                style={{
+                  offsetPath:
+                    'path("M 150 150 C 160 150 1488 149 900 -1582 C -582 -1211 -1086 139 150 150")',
+                }}
+              />
             </Animation>
           </div>
           <Col style={{ width: '600px', height: 'fit-content' }} gap={16}>
@@ -175,17 +186,17 @@ export default function AnimationSlide() {
                   },
                 }}
               >
-                <Card
-                  theme="normal"
-                  style={{ borderRadius: '1.5rem' }}
-                  className={styles.withHighlight}
-                >
+                <Card fill="rgb(53 51 115 / 32%)" className={styles.withHighlight}>
                   <div
                     className={styles.fire}
                     style={{ top: '60%', left: '60%', transform: 'none', width: 120, height: 120 }}
                   ></div>
-                  <Anchor id="scroll">Анимации </Anchor>
-                  <Text variant="body-1">
+                  <Anchor id="scroll">
+                    <Text variant="heading-1" color="#A9A6FF">
+                      Анимации
+                    </Text>{' '}
+                  </Anchor>
+                  <Text color="#A9A6FF">
                     Animation позволяет делать красивые анимации на основе CSS.
                   </Text>
                 </Card>
@@ -207,9 +218,11 @@ export default function AnimationSlide() {
                   },
                 }}
               >
-                <Card theme="filled" style={{ width: '70%', borderRadius: '1.5rem' }}>
-                  <Text variant="heading-1">Фаза:</Text>
-                  <Text variant="display-1">
+                <Card fill="#A9A6FF" style={{ width: '70%', borderRadius: '1.5rem' }}>
+                  <Text variant="heading-1" color="#353373">
+                    Фаза:
+                  </Text>
+                  <Text color="rgb(1, 0, 20, 54%)" variant="display-1">
                     <Phase></Phase>
                   </Text>
                 </Card>

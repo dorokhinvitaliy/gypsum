@@ -73,9 +73,10 @@ export default function TransitionSlide() {
       phase: { start: ${keys[2]}, stop: ${keys[3]} },
       pattern: '{}px',
     },
-    opacity: {
-      from: 1,
-      to: 0,
+    offsetDistance: {
+      from: 0,
+      to: 100,
+      pattern: "{}%",
       phase: { start: ${keys[3]}, stop: ${keys[4]} },
     },
   }}
@@ -148,14 +149,21 @@ export default function TransitionSlide() {
                   phase: { start: keys[2], stop: keys[3] },
                   pattern: '{}px',
                 },
-                opacity: {
-                  from: 1,
-                  to: 0,
+                offsetDistance: {
+                  from: 0,
+                  to: 100,
+                  pattern: '{}%',
                   phase: { start: keys[3], stop: keys[4] },
                 },
               }}
             >
-              <img src="/diamond.png" width={250} height={250} alt="" />
+              <img
+                src="/prettyLamp.svg"
+                width={300}
+                height={300}
+                alt=""
+                style={{ offsetPath: 'path("M 150 150 C 494 150 584 -125 148 42")' }}
+              />
             </Transition>
           </div>
           <Col style={{ width: '600px', height: 'fit-content' }} gap={16}>
@@ -178,7 +186,7 @@ export default function TransitionSlide() {
                 }}
               >
                 <Card
-                  theme="normal"
+                  fill="rgb(53 51 115 / 32%)"
                   style={{ borderRadius: '1.5rem' }}
                   className={styles.withHighlight}
                 >
@@ -186,8 +194,12 @@ export default function TransitionSlide() {
                     className={styles.fire}
                     style={{ top: '60%', left: '60%', transform: 'none', width: 120, height: 120 }}
                   ></div>
-                  <Anchor id="transition">Переходы </Anchor>
-                  <Text variant="body-1">
+                  <Anchor id="transition">
+                    <Text variant="heading-1" color="#A9A6FF">
+                      Переходы
+                    </Text>{' '}
+                  </Anchor>
+                  <Text color="#A9A6FF">
                     Transition позволяют делать красивые анимации, завязанные на скролле страницы.
                   </Text>
                 </Card>
@@ -210,13 +222,14 @@ export default function TransitionSlide() {
                 }}
               >
                 <Card
-                  theme="filled"
-                  brandColor="#b44804"
+                  fill="#A9A6FF"
                   style={{ width: '100%', borderRadius: '1.5rem' }}
                   justifyContent="space-between"
                 >
-                  <Text variant="heading-1">Фаза:</Text>
-                  <Text variant="display-1">
+                  <Text variant="heading-1" color="#353373">
+                    Фаза:
+                  </Text>
+                  <Text variant="display-1" color="rgb(1, 0, 20, 54%)">
                     <Phase></Phase>
                   </Text>
                 </Card>
