@@ -1,7 +1,7 @@
 import type { CSSProperties, HTMLAttributes } from 'react';
 import styles from './Text.module.scss';
 import classNames from 'classnames';
-import { textColors, type TextColor, type TextVariant } from './Text.types';
+import { baseColors, type NamedTextColor, type TextColor, type TextVariant } from './Text.types';
 
 export default function Text({
   children,
@@ -21,7 +21,7 @@ export default function Text({
   className?: string;
 } & HTMLAttributes<HTMLSpanElement>) {
   const isCustom = () => {
-    return !textColors.includes(color);
+    return !baseColors.has(color as NamedTextColor);
   };
   return (
     <span

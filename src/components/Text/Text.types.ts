@@ -37,7 +37,7 @@ export const textVariants = [
   'hint-2',
 ] as const;
 
-export type TextColor =
+export type NamedTextColor =
   | 'primary'
   | 'secondary'
   | 'tertiary'
@@ -45,8 +45,9 @@ export type TextColor =
   | 'inherit'
   | 'primary-reverted'
   | 'secondary-reverted'
-  | 'brand'
-  | CSSProperties['color'];
+  | 'brand';
+
+export type TextColor = NamedTextColor | CSSProperties['color'];
 
 export const textColors = [
   'primary',
@@ -58,3 +59,14 @@ export const textColors = [
   'secondary-reverted',
   'brand',
 ] as const;
+
+export const baseColors: Set<NamedTextColor> = new Set([
+  'primary',
+  'secondary',
+  'tertiary',
+  'disabled',
+  'inherit',
+  'primary-reverted',
+  'secondary-reverted',
+  'brand',
+]);
