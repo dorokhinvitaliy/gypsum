@@ -55,10 +55,16 @@ npm run dev
 
 Пропсы:
 
-- `variant?: TextVariant`
-
 ```tsx
-type TextVariant =
+interface TextProps = {
+  children: React.ReactNode;
+  variant?: TextVariant;
+  color?: TextColor;
+  weight?: CSSProperties['fontWeight'];
+  size?: CSSProperties['fontSize'];
+} & HTMLAttributes<HTMLSpanElement>;
+
+interface TextVariant =
   | 'display-1'
   | 'display-2'
   | 'display-3'
@@ -68,6 +74,7 @@ type TextVariant =
   | 'heading-3'
   | 'subheading-1'
   | 'subheading-2'
+  | 'body-0d5'
   | 'body-1'
   | 'body-2'
   | 'caption'
@@ -76,7 +83,19 @@ type TextVariant =
   | 'hint-2';
 ```
 
-- `color?: TextColor` — цвет: `'primary' | 'brand' | 'secondary' | 'tertiary' | 'disabled' | 'inherit'`.
+```tsx
+interface NamedTextColor =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'disabled'
+  | 'inherit'
+  | 'primary-reverted'
+  | 'secondary-reverted'
+  | 'brand';
+
+export type TextColor = NamedTextColor | CSSProperties['color'];
+```
 
 Пример:
 
@@ -94,10 +113,27 @@ import { Text } from '@/components';
 
 Пропсы:
 
-- `theme?: 'primary' | 'secondary' | 'normal' | 'normal-flat' | 'flat' | 'outlined' | 'reverted' | 'reverted-secondary'`
-- `size?: 'xl' | 'l' | 'm' | 's' | 'xs'`
-- `width?: 'auto' | 'max'`
-- `disabled?: boolean`, `loading?: boolean`, а также стандартные атрибуты кнопки
+```tsx
+interface ButtonTheme =
+  | 'primary'
+  | 'secondary'
+  | 'normal'
+  | 'normal-flat'
+  | 'flat'
+  | 'outlined'
+  | 'reverted'
+  | 'reverted-secondary';
+
+interface ButtonProps = {
+  children: React.ReactNode;
+  theme?: ButtonTheme;
+  size?: 'xl' | 'l' | 'm' | 's' | 'xs';
+  width?: 'auto' | 'max';
+  disabled?: boolean;
+  loading?: boolean;
+  className?: string;
+} & HTMLAttributes<HTMLButtonElement>;
+```
 
 Пример:
 
@@ -125,12 +161,23 @@ import { HomeSolid } from '@/components/Icons';
 Пример:
 
 ```tsx
-import { Flex } from '@/components';
-
-<Flex gap={12} alignItems="center">
-  <div>A</div>
-  <div>B</div>
-</Flex>;
+import { Flex, Card } from '@/components';
+return (
+  <Centered>
+    <Col gap={12} alignItems="center">
+      <Flex gap={8}>
+        <Card>....</Card>
+        <Card>....</Card>
+        <Card>....</Card>
+      </Flex>
+      <Flex gap={8}>
+        <Card>....</Card>
+        <Card>....</Card>
+        <Card>....</Card>
+      </Flex>
+    </Col>
+  </Centered>
+);
 ```
 
 ### Card
@@ -139,16 +186,25 @@ import { Flex } from '@/components';
 
 Пропсы:
 
-- `theme?: 'normal' | 'normal-branded' | 'filled'`
-- `outlined?: boolean`
-- `brandColor?: string` — можно задать брендовый цвет
+```tsx
+interface CardProps = {
+  children: React.ReactNode;
+  className?: string;
+  theme?: 'normal' | 'normal-branded' | 'filled' | 'white';
+  outlined?: boolean;
+  style?: CSSProperties;
+  brandColor?: string;
+  fill?: CSSProperties['background'];
+  size?: 's' | 'm' | 'l' | 'xl';
+} & HTMLAttributes<HTMLElement> & FlexProps;
+```
 
 Пример:
 
 ```tsx
 import { Card } from '@/components';
 
-<Card theme="filled" outlined brandColor="#747bff">
+<Card theme="normal-branded" outlined brandColor="#747bff">
   Контент карточки
 </Card>;
 ```
@@ -189,6 +245,9 @@ type Option = { id: string | number; text: string };
 Пропсы (основные):
 
 - `options: Option[]`
+- `multiple: boolean`
+- `selectLimit: number`
+  selectLimit работает только в режиме `multiple`
 - `selected: Option | Option[] | null`
 - `onChange: (option: Option | Option[]) => void`
 - `placeholder: string`, `multiple?: boolean`, `closeAfterSelect?: boolean`, `width?: 'auto' | 'max'`, `selectLimit?: number`
@@ -215,7 +274,7 @@ import { Select } from '@/components';
 
 Пропсы:
 
-- `value: string`, `onChange: (value: string) => void`
+- `value: string`, `onChange: (value: string) => void`, `valid: boolean`, `disabled: boolean`
 - `placeholder: string`, `helperText?: string`, `width?: 'max' | 'auto'`
 
 Пример:
@@ -295,7 +354,7 @@ import { Loader } from '@/components';
 <Loader withOverlay />;
 ```
 
-### Layout / Aside / Navigation
+### Aside
 
 Левая панель навигации с коллапсом, группами и ссылками. Экспортируется как `Aside` из `@/components`.
 
@@ -383,8 +442,8 @@ import { HomeSolid } from '@/components/Icons';
 
 - `Slides` — контейнер для набора слайдов
 - `Slide` — область с фиксированной высотой (вьюпорты), измеряет фазу скролла
-- `Transition` — интерполирует стили по фазе слайдов
-- `Animation` — проигрывает анимации по правилам (триггеры, rewind и т.д.)
+- `Transition` — интерполирует стили по фазе слайдов, работает только внутри компонента Slide
+- `Animation` — проигрывает анимации по триггеру (% прокрутки страницы, непропорционально скроллу юзера), работает только внутри компонента Slide
 
 Типы: см. `src/components/Animation/types.ts`.
 
