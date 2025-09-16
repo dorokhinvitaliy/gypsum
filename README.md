@@ -161,7 +161,7 @@ import { HomeSolid } from '@/components/Icons';
 Пример:
 
 ```tsx
-import { Flex, Card } from '@/components';
+import { Flex, Col, Centered, Card } from '@/components';
 return (
   <Centered>
     <Col gap={12} alignItems="center">
