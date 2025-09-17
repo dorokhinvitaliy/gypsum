@@ -72,7 +72,12 @@ const Animator = () => {
           transition: 'all .3s ease', */
           }}
         >
-          <img src="/Developer.svg" width={500} height={500} alt="developer" />
+          <img
+            src={`${import.meta.env.BASE_URL}/Developer.svg`}
+            width={500}
+            height={500}
+            alt="developer"
+          />
           <Col gap={16}>
             <Text variant="heading-1">
               Анимации и переходы в{' '}

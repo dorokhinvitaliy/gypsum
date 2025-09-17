@@ -158,7 +158,7 @@ export default function TransitionSlide() {
               }}
             >
               <img
-                src="/prettyLamp.svg"
+                src={`${import.meta.env.BASE_URL}/prettyLamp.svg`}
                 width={300}
                 height={300}
                 alt=""

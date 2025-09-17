@@ -156,7 +156,7 @@ export default function AnimationSlide() {
               }}
             >
               <img
-                src="/prettyRocket.svg"
+                src={`${import.meta.env.BASE_URL}/prettyRocket.svg`}
                 width={300}
                 height={300}
                 alt=""
