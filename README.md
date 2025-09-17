@@ -17,6 +17,10 @@ Gypsum — это легкий UI Kit на TypeScript для React, ориент
 
 ---
 
+## Live Demo на GithubPages
+
+[https://dorokhinvitaliy.github.io/gypsum](https://dorokhinvitaliy.github.io/gypsum)
+
 ## Запуск проекта локально
 
 Требования: Node.js 18+.
