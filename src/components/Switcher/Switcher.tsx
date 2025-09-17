@@ -38,7 +38,9 @@ const Switcher = ({
       {list.map((item, index) => (
         <Button
           theme="normal-flat"
-          ref={(el: HTMLButtonElement | null) => (refs.current[index] = el)}
+          ref={(el: HTMLButtonElement | null) => {
+            refs.current[index] = el;
+          }}
           className={classNames(styles.switchButton, {
             [styles.selected]: selected?.value === item.value,
           })}

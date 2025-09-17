@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { type HTMLAttributes } from 'react';
+import React, { forwardRef, type HTMLAttributes } from 'react';
 import styles from './Button.module.scss';
 
 type ButtonTheme =
@@ -22,18 +22,22 @@ export type ButtonProps = {
   className?: string;
 } & HTMLAttributes<HTMLButtonElement>;
 
-export default function Button({
-  children,
-  theme = 'primary',
-  size = 'l',
-  width,
-  disabled = false,
-  className = '',
-  loading = false,
-  ...props
-}: ButtonProps) {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  {
+    children,
+    theme = 'primary',
+    size = 'l',
+    width,
+    disabled = false,
+    className = '',
+    loading = false,
+    ...props
+  },
+  ref,
+) {
   return (
     <button
+      ref={ref}
       className={classNames(
         styles.button,
         styles['theme-' + theme],
@@ -54,4 +58,6 @@ export default function Button({
       {children}
     </button>
   );
-}
+});
+
+export default Button;
