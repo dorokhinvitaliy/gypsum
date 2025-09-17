@@ -73,7 +73,7 @@ const Animator = () => {
           }}
         >
           <img
-            src={`${import.meta.env.BASE_URL}/Developer.svg`}
+            src={`${import.meta.env.BASE_URL}Developer.svg`}
             width={500}
             height={500}
             alt="developer"
