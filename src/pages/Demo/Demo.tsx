@@ -16,7 +16,6 @@ import { type Option } from '@/components/Input/Select.type';
 import CaretRightOutline from '@/components/Icons/CaretRightOutline';
 import { useState } from 'react';
 
-import { ScrollToId } from '@/components/Navigation/ScrollToId';
 import Article from '@/components/Article/Article';
 import TextDemo from './TextDemo';
 import { ThemeDemo } from './ThemeDemo';
@@ -123,14 +122,17 @@ export type TextColor = 'primary' | 'secondary' | 'tertiary' | 'disabled' | 'inh
           посмотреть, а затем изучить каждый подробнее.
         </Text>
         <Text weight={500}>
-          Сейчас пока здесь не всё актуально... Лучше обращайся в Readme.MD за документацией. Данный
-          сайт создан для того, чтобы продемонстрировать UI Kit, поэтому написан используя
-          собственные ui-компоненты, смело отрывай папку /pages и изучай.
+          Пока эта страница не актуализирована. <br /> Обращайся в <code>Readme.MD</code> за
+          документацией. Данный сайт создан для демонстрации возможностей UI KIT и написан
+          исключительно с помощью комопнентов GypsumUI, можешь посмотреть исходный код демо-страниц
+          в <code>/src/pages</code> .
         </Text>
         <Flex gap={8}>
-          <Button onClick={() => ScrollToId('TextBlock')}>
-            Начать знакомство <Icon size={25} data={CaretRightOutline}></Icon>
-          </Button>
+          <Link to="#TextBlock">
+            <Button>
+              Начать знакомство <Icon size={25} data={CaretRightOutline}></Icon>
+            </Button>
+          </Link>
           <Link to="/">
             <Button theme="secondary">На главную</Button>
           </Link>
