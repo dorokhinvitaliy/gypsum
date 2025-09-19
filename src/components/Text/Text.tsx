@@ -9,6 +9,7 @@ export default function Text({
   color = 'primary',
   weight,
   size,
+  highlighted,
   className,
   style,
   ...rest
@@ -18,6 +19,7 @@ export default function Text({
   color?: TextColor;
   weight?: CSSProperties['fontWeight'];
   size?: CSSProperties['fontSize'];
+  highlighted?: boolean;
   className?: string;
 } & HTMLAttributes<HTMLSpanElement>) {
   const isCustom = () => {
@@ -26,8 +28,10 @@ export default function Text({
   return (
     <span
       className={classNames(
+        styles.text,
         styles['text-variant-' + variant],
         styles['text-color-' + color],
+        { [styles.highlighted]: highlighted },
         className,
       )}
       style={{
